@@ -1,0 +1,98 @@
+/* COLOR — paleta medida y verificada. No agregar valores fuera de esta lista.
+   REGLA CRÍTICA: la salvia --sage (#79877D) nunca lleva texto encima ni se usa
+   como color de texto. Es color de marca, no color funcional.
+   NINGÚN AZUL en el sistema. */
+
+:root {
+  /* ── Base ─────────────────────────────────────────────── */
+  --cream-100: #F7F1E6; /* base — fondo dominante, ~65% del lienzo */
+  --cream-200: #EEDDC4; /* superficie — bloques diferenciados */
+  --sage-900: #2C3A30;  /* ancla — texto principal, footer. 8.99:1 sobre base */
+  --sage-700: #4A5A4D;  /* secundario — texto de apoyo. 5.51:1 sobre base */
+  --sage-500: #79877D;  /* marca — SOLO decorativo */
+
+  /* Sombras de interacción del ancla (derivadas, solo para hover/press) */
+  --sage-950: #1E2A21;
+  --sage-1000: #16201A;
+
+  /* Validación de formularios. Único color cálido fuera de la paleta salvia:
+     se usa exclusivamente para errores de campo, nunca para precios ni badges. */
+  --clay-700: #8C3A2E; /* 6.1:1 sobre --cream-100 */
+
+  /* ── Alias semánticos: superficie ─────────────────────── */
+  --surface-page: var(--cream-100);
+  --surface-raised: var(--cream-200);
+  --surface-inverse: var(--sage-900);
+  --surface-brand: var(--sage-500); /* solo bloques decorativos y bloque de logo */
+
+  /* ── Alias semánticos: texto ──────────────────────────── */
+  --text-primary: var(--sage-900);   /* títulos, cuerpo, TODO dato crítico */
+  --text-secondary: var(--sage-700); /* apoyo, metadatos. Nunca gris claro */
+  --text-on-inverse: var(--cream-200);
+  --text-on-inverse-muted: #C9BFA9;  /* 7.4:1 sobre --sage-900 */
+  --text-critical: var(--sage-900);  /* precios, m2, matrícula, teléfono */
+  --text-error: var(--clay-700);
+  --text-link: var(--sage-900);
+  --text-link-hover: var(--sage-950);
+
+  /* ── Alias semánticos: líneas y filetes ───────────────── */
+  --rule-hairline: rgba(44, 58, 48, 0.16);  /* separador por defecto */
+  --rule-strong: rgba(44, 58, 48, 0.34);    /* bordes de campo y de tarjeta */
+  --rule-brand: var(--sage-500);            /* filete decorativo de marca */
+  --rule-on-inverse: rgba(238, 221, 196, 0.24);
+
+  /* ── Alias semánticos: acciones ───────────────────────── */
+  --action-solid-bg: var(--sage-900);
+  --action-solid-bg-hover: var(--sage-950);
+  --action-solid-bg-press: var(--sage-1000);
+  --action-solid-text: var(--cream-100);
+  --action-outline-border: var(--sage-900);
+  --action-outline-text: var(--sage-900);
+  --action-outline-bg-hover: rgba(44, 58, 48, 0.07);
+  --action-outline-bg-press: rgba(44, 58, 48, 0.13);
+  --action-disabled-text: var(--sage-700);
+  --action-disabled-border: var(--rule-strong);
+
+  /* ── Fotografía ───────────────────────────────────────
+     El scrim es el único gradiente del sistema y no es decoración:
+     es la capa funcional que da contraste al texto sobre foto.
+     Sin él, un hero a sangre no puede cumplir 4.5:1. */
+  --scrim-photo: linear-gradient(to top,
+    rgba(22, 32, 26, 0.90) 0%,
+    rgba(22, 32, 26, 0.80) 20%,
+    rgba(22, 32, 26, 0.44) 46%,
+    rgba(22, 32, 26, 0.08) 72%,
+    rgba(22, 32, 26, 0.00) 100%);
+
+  /* Texto sobre fotografía. Medido contra el PEOR caso: el scrim al 0.80 sobre
+     una zona blanca de la foto, o sea fondo efectivo #454D48. Ahí el crema da
+     14.9:1 y el apagado 6.3:1. Si se aclara el scrim, revisar estas dos. */
+  --text-on-photo: var(--cream-100);
+  --text-on-photo-muted: #E3DAC7;
+  --rule-on-photo: rgba(247, 241, 230, 0.30);
+
+  /* Superficie profunda: la galería pesa más que el pie para que
+     la fotografía sea lo único iluminado del bloque. */
+  --surface-deep: var(--sage-1000);
+  --rule-on-deep: rgba(238, 221, 196, 0.16);
+
+  /* ── Acento Heredia ───────────────────────────────────
+     El emprendimiento trae su identidad (terracota Supercielo) y convive
+     con la salvia sin reemplazarla: el terracota vive SOLO dentro de las
+     secciones del bloque Heredia (pliego, tipologías, ubicación) vía la
+     clase de ámbito .zona-terra. Nunca como color de acción.
+     Medidos sobre --cream-100: terra-800 6.8:1 (texto de cualquier cuerpo),
+     terra-600 4.4:1 (solo rótulos, cifras grandes y filetes).
+     terra-800 comparte valor con --clay-700 a propósito: mismo pigmento,
+     semántica distinta (clay = error de campo, terra = marca Heredia). */
+  --terra-800: #8C3A2E;
+  --terra-600: #B4543B;
+  --terra-100: #F3E4D7;
+  --rule-terra: rgba(140, 58, 46, 0.34);
+
+  /* ── Foco ─────────────────────────────────────────────── */
+  --focus-ring: var(--sage-900);
+  --focus-ring-inverse: var(--cream-200);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+}

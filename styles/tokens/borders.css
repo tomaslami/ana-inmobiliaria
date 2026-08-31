@@ -1,0 +1,21 @@
+/* BORDES Y RADIOS — la separación se hace con línea fina y espacio.
+   NO hay sistema de sombras: las sombras difusas están prohibidas.
+   Tampoco hay gradientes ni bordes gruesos. */
+
+:root {
+  --border-hairline: 1px;
+  --border-emphasis: 2px; /* solo para el anillo de foco y el subrayado activo */
+
+  --radius-none: 0;
+  --radius-sm: 2px;   /* campos, botones, tarjetas */
+  --radius-md: 4px;   /* contenedores mayores y marcos de imagen */
+  --radius-pill: 999px; /* solo etiquetas de una palabra */
+
+  --shadow-none: none; /* token explícito: cualquier sombra es una desviación */
+
+  /* Recetas de borde de uso frecuente */
+  --line-divider: var(--border-hairline) solid var(--rule-hairline);
+  --line-card: var(--border-hairline) solid var(--rule-strong);
+  --line-brand: var(--border-emphasis) solid var(--rule-brand);
+  --line-on-inverse: var(--border-hairline) solid var(--rule-on-inverse);
+}

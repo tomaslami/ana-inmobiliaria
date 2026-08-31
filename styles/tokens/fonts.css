@@ -1,0 +1,11 @@
+/* Tipografías de marca — Newsreader (display/títulos) + Source Sans 3 (cuerpo, eyebrows).
+   Pesos permitidos: 400, 500, 600. El peso 300 (Light) NO se carga a propósito.
+   Servidas vía next/font/google (self-hosted, sin @import externo) — ver app/layout.tsx,
+   que expone las variables --ac-font-newsreader y --ac-font-source-sans en <html>. */
+
+:root {
+  --font-display: var(--ac-font-newsreader), "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-sans: var(--ac-font-source-sans), "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-body: var(--font-sans);
+  --font-label: var(--font-sans);
+}

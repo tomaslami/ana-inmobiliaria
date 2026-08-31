@@ -1,0 +1,75 @@
+/* CONTENIDO — tarjetas, datos, citas, acordeón, marcos de imagen.
+   Separación por filete y aire. Sin sombra, sin gradiente. */
+
+.ac-card { display: flex; flex-direction: column; gap: var(--space-md); padding: var(--space-lg); background: transparent; border: var(--line-card); border-radius: var(--radius-sm); }
+.ac-card--raised { background: var(--surface-raised); border-color: transparent; }
+.ac-card--plain { border: 0; padding: 0; }
+.ac-card--ruled { border: 0; border-top: var(--line-brand); border-radius: 0; padding: var(--space-lg) 0 0; }
+.ac-card__title { font-family: var(--font-display); font-size: var(--size-h4); font-weight: var(--weight-semibold); line-height: var(--leading-heading); color: var(--text-primary); }
+.ac-card__body { font-family: var(--font-body); font-size: var(--size-body-sm); line-height: var(--leading-body); color: var(--text-secondary); }
+a.ac-card { text-decoration: none; transition: var(--transition-control); }
+a.ac-card:hover { border-color: var(--sage-900); }
+@media (min-width: 48rem) { .ac-card { padding: var(--space-xl); } }
+
+/* Etiqueta */
+.ac-badge { display: inline-flex; align-items: center; gap: var(--space-2xs); font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; line-height: 1; padding: 0.45em 0.7em; border-radius: var(--radius-sm); border: var(--border-hairline) solid var(--rule-strong); color: var(--text-primary); background: transparent; }
+.ac-badge--filled { background: var(--surface-raised); border-color: transparent; }
+.ac-badge--inverse { background: var(--surface-inverse); color: var(--text-on-inverse); border-color: transparent; }
+
+/* Dato — precio, m2, matrícula. Siempre en color ancla, nunca atenuado. */
+.ac-stat { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.ac-stat__value { font-family: var(--font-display); font-size: var(--size-h2); font-weight: var(--weight-medium); line-height: 1.1; color: var(--text-critical); font-variant-numeric: tabular-nums; }
+.ac-stat__label { font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-secondary); }
+.ac-stat__note { font-family: var(--font-body); font-size: var(--size-caption); color: var(--text-secondary); }
+.ac-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-lg); }
+@media (min-width: 48rem) { .ac-stat-grid { grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: var(--space-xl); } }
+
+/* Cita / testimonio */
+.ac-quote { display: flex; flex-direction: column; gap: var(--space-md); padding-left: var(--space-lg); border-left: var(--line-brand); }
+.ac-quote__text { font-family: var(--font-display); font-size: var(--size-h3); font-weight: var(--weight-regular); line-height: 1.35; color: var(--text-primary); text-wrap: pretty; }
+.ac-quote__attribution { display: flex; flex-direction: column; gap: 0.15rem; }
+.ac-quote__name { font-family: var(--font-label); font-size: var(--size-body-sm); font-weight: var(--weight-semibold); color: var(--text-primary); }
+.ac-quote__meta { font-family: var(--font-body); font-size: var(--size-caption); color: var(--text-secondary); }
+
+/* Lista de características con ícono */
+.ac-feature-list { display: flex; flex-direction: column; gap: var(--space-md); margin: 0; padding: 0; list-style: none; }
+.ac-feature { display: flex; align-items: flex-start; gap: var(--space-sm); }
+.ac-feature__icon { flex: none; color: var(--sage-700); margin-top: 0.15rem; }
+.ac-feature__text { font-family: var(--font-body); font-size: var(--size-body); line-height: var(--leading-body); color: var(--text-primary); }
+.ac-feature__text b { font-weight: var(--weight-semibold); }
+
+/* Acordeón (preguntas frecuentes) */
+.ac-accordion { display: flex; flex-direction: column; border-top: var(--line-divider); }
+.ac-accordion__item { border-bottom: var(--line-divider); }
+.ac-accordion__trigger { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: var(--target-min); padding: var(--space-md) 0; background: transparent; border: 0; cursor: pointer; text-align: left; font-family: var(--font-display); font-size: var(--size-h4); font-weight: var(--weight-medium); color: var(--text-primary); transition: var(--transition-control); }
+.ac-accordion__trigger:hover { color: var(--sage-950); }
+.ac-accordion__chevron { flex: none; color: var(--text-secondary); transition: transform var(--duration-base) var(--ease-standard); }
+.ac-accordion__trigger[aria-expanded="true"] .ac-accordion__chevron { transform: rotate(180deg); }
+/* Panel: siempre en el DOM; abre animando la fila de la grilla (0fr → 1fr).
+   El padding vive en un wrapper INTERNO al recorte: si estuviera en el ítem
+   de la grilla, border-box le pondría piso a la altura cerrada, y
+   transicionarlo sería layout thrash. `visibility` espera al fin del cierre
+   para sacar el contenido del árbol de accesibilidad. */
+.ac-accordion__panelbox { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows var(--duration-base) var(--ease-standard), visibility 0s linear var(--duration-base); }
+.ac-accordion__panelbox[data-open] { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows var(--duration-base) var(--ease-standard); }
+.ac-accordion__panel { min-height: 0; overflow: hidden; font-family: var(--font-body); font-size: var(--size-body); line-height: var(--leading-body); color: var(--text-secondary); max-width: var(--measure-body); }
+.ac-accordion__panelinner { padding-bottom: var(--space-lg); }
+
+/* Marco de imagen — la foto es una superficie de marca, no una tarjeta */
+.ac-media { position: relative; overflow: hidden; background: var(--surface-raised); border-radius: var(--radius-md); }
+.ac-media--square { aspect-ratio: 1 / 1; }
+.ac-media--portrait { aspect-ratio: 3 / 4; }
+.ac-media--landscape { aspect-ratio: 4 / 3; }
+.ac-media--wide { aspect-ratio: 16 / 9; }
+.ac-media--sharp { border-radius: var(--radius-none); }
+.ac-media img { width: 100%; height: 100%; object-fit: cover; }
+.ac-media__placeholder { position: absolute; inset: 0; display: grid; place-items: center; gap: var(--space-xs); text-align: center; padding: var(--space-lg); background: var(--surface-raised); border: var(--border-hairline) dashed var(--rule-strong); border-radius: inherit; }
+.ac-media__placeholder span { font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-secondary); }
+.ac-media__caption { margin-top: var(--space-xs); font-family: var(--font-body); font-size: var(--size-caption); color: var(--text-secondary); }
+
+/* Fila de contacto */
+.ac-contact-row { display: flex; align-items: center; gap: var(--space-sm); min-height: var(--target-min); text-decoration: none; color: var(--text-primary); }
+.ac-contact-row__icon { flex: none; color: var(--sage-700); }
+.ac-contact-row__value { font-family: var(--font-body); font-size: var(--size-body); font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; color: var(--text-critical); }
+.ac-on-inverse .ac-contact-row, .ac-on-inverse .ac-contact-row__value { color: var(--text-on-inverse); }
+.ac-on-inverse .ac-contact-row__icon { color: var(--text-on-inverse-muted); }

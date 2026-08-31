@@ -1,0 +1,43 @@
+/* ESPACIADO — escala de 4px expresada en rem. El aire es el material principal:
+   el minimalismo del sistema es DE CANTIDAD, no de temperatura. */
+
+:root {
+  --space-2xs: 0.25rem;  /* 4 */
+  --space-xs: 0.5rem;    /* 8 — separación mínima entre targets */
+  --space-sm: 0.75rem;   /* 12 */
+  --space-md: 1rem;      /* 16 */
+  --space-lg: 1.5rem;    /* 24 */
+  --space-xl: 2rem;      /* 32 */
+  --space-2xl: 3rem;     /* 48 */
+  --space-3xl: 4rem;     /* 64 */
+  --space-4xl: 6rem;     /* 96 */
+  --space-5xl: 8rem;     /* 128 */
+  --space-6xl: 10rem;    /* 160 */
+
+  /* Ritmo de página */
+  --gutter: 1.5rem;             /* margen lateral mobile */
+  --section-y: var(--space-3xl); /* aire vertical entre secciones, mobile */
+  --stack-tight: var(--space-sm);
+  --stack: var(--space-lg);
+  --stack-loose: var(--space-xl);
+
+  /* Anchos de contenedor */
+  --container-max: 75rem;   /* 1200 */
+  --container-text: 44rem;  /* 704 — columnas de lectura */
+
+  /* Targets táctiles */
+  --target-min: 3rem;       /* 48px — mínimo absoluto */
+  --target-gap: var(--space-xs);
+  --control-height: 3rem;   /* 48px — botones y campos */
+  --control-height-lg: 3.5rem;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 2.5rem;
+    --section-y: var(--space-5xl);
+  }
+}
+@media (min-width: 75rem) {
+  :root { --gutter: 4rem; }
+}

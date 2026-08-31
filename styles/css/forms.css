@@ -1,0 +1,56 @@
+/* FORMULARIOS
+   Label persistente arriba, nunca placeholder como label.
+   Altura mínima 48px, tipo mínimo 16px, foco con anillo de 2px. */
+
+.ac-field { display: flex; flex-direction: column; gap: var(--space-xs); }
+.ac-field__label { font-family: var(--font-label); font-size: var(--size-body-sm); font-weight: var(--weight-semibold); color: var(--text-primary); line-height: 1.3; }
+.ac-field__optional { font-weight: var(--weight-regular); color: var(--text-secondary); }
+.ac-field__hint { font-family: var(--font-body); font-size: var(--size-caption); color: var(--text-secondary); line-height: var(--leading-tight); }
+.ac-field__error { display: flex; align-items: flex-start; gap: var(--space-2xs); font-family: var(--font-body); font-size: var(--size-caption); font-weight: var(--weight-medium); color: var(--text-error); line-height: var(--leading-tight); }
+
+.ac-input, .ac-textarea, .ac-select {
+  width: 100%;
+  min-height: var(--control-height);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--size-body); /* 18px: nunca por debajo de 16 */
+  line-height: 1.4;
+  color: var(--text-primary);
+  background: var(--cream-100);
+  border: var(--border-hairline) solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  transition: var(--transition-control);
+  appearance: none;
+}
+.ac-input::placeholder, .ac-textarea::placeholder { color: var(--text-secondary); opacity: 1; }
+.ac-input:hover, .ac-textarea:hover, .ac-select:hover { border-color: var(--sage-700); }
+.ac-input:focus-visible, .ac-textarea:focus-visible, .ac-select:focus-visible { border-color: var(--sage-900); }
+.ac-textarea { min-height: 8rem; resize: vertical; line-height: var(--leading-body); }
+.ac-input[aria-invalid="true"], .ac-textarea[aria-invalid="true"], .ac-select[aria-invalid="true"] { border-color: var(--clay-700); border-width: var(--border-emphasis); }
+.ac-input[disabled], .ac-textarea[disabled], .ac-select[disabled] { background: transparent; color: var(--text-secondary); opacity: 0.6; cursor: not-allowed; }
+
+/* Sobre superficie crema, el campo se aclara para mantener el contraste de borde */
+.ac-on-raised .ac-input, .ac-on-raised .ac-textarea, .ac-on-raised .ac-select { background: var(--cream-100); }
+
+.ac-select-wrap { position: relative; display: block; }
+.ac-select { padding-right: var(--space-2xl); }
+.ac-select-wrap__chevron { position: absolute; right: var(--space-md); top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--text-secondary); }
+
+/* Casillas y radios: caja de 24px, target de 48px por el padding del label */
+.ac-choice { display: flex; align-items: flex-start; gap: var(--space-sm); min-height: var(--target-min); padding-block: var(--space-sm); cursor: pointer; }
+.ac-choice__control { flex: none; width: 1.5rem; height: 1.5rem; margin-top: 0.1rem; display: grid; place-items: center; border: var(--border-hairline) solid var(--rule-strong); background: var(--cream-100); color: transparent; transition: var(--transition-control); }
+.ac-choice__control--box { border-radius: var(--radius-sm); }
+.ac-choice__control--dot { border-radius: var(--radius-pill); }
+.ac-choice:hover .ac-choice__control { border-color: var(--sage-700); }
+.ac-choice input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.ac-choice input:checked + .ac-choice__control { background: var(--sage-900); border-color: var(--sage-900); color: var(--cream-100); }
+.ac-choice input:focus-visible + .ac-choice__control { outline: var(--focus-ring-width) solid var(--focus-ring); outline-offset: var(--focus-ring-offset); }
+.ac-choice__dot { width: 0.5rem; height: 0.5rem; border-radius: var(--radius-pill); background: currentColor; }
+.ac-choice__label { font-family: var(--font-body); font-size: var(--size-body-sm); color: var(--text-primary); line-height: 1.45; }
+.ac-choice-group { display: flex; flex-direction: column; gap: var(--space-2xs); }
+.ac-choice-group__legend { font-family: var(--font-label); font-size: var(--size-body-sm); font-weight: var(--weight-semibold); color: var(--text-primary); padding: 0; margin-bottom: var(--space-2xs); }
+fieldset.ac-choice-group { border: 0; margin: 0; padding: 0; }
+
+/* Pila de formulario */
+.ac-form-stack { display: flex; flex-direction: column; gap: var(--space-lg); }
+@media (min-width: 48rem) { .ac-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); } }

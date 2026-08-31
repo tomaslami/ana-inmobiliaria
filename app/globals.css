@@ -1,0 +1,13 @@
+/* Ana Chaher — hoja de estilos raíz. Solo imports. */
+@import "../styles/tokens/fonts.css";
+@import "../styles/tokens/colors.css";
+@import "../styles/tokens/typography.css";
+@import "../styles/tokens/spacing.css";
+@import "../styles/tokens/borders.css";
+@import "../styles/tokens/motion.css";
+@import "../styles/tokens/base.css";
+@import "../styles/css/actions.css";
+@import "../styles/css/forms.css";
+@import "../styles/css/content.css";
+@import "../styles/css/navigation.css";
+@import "../styles/layout.css";
