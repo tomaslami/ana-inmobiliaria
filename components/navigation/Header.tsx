@@ -43,10 +43,23 @@ export function Header({
   className = "",
   ...rest
 }: HeaderProps) {
+  /* Nace en estado sobre-foto: es lo que el servidor renderiza (la página
+     abre en el hero) y useLayoutEffect lo corrige ANTES del primer paint si
+     el navegador restauró el scroll a mitad de página. Si naciera sólido,
+     la hidratación dispararía el crossfade completo durante la carga — y
+     con el hilo principal ocupado queda congelado a mitad de camino. */
   const [open, setOpen] = useState(false);
-  const [sobreFoto, setSobreFoto] = useState(false);
+  const [sobreFoto, setSobreFoto] = useState(true);
   const [visible, setVisible] = useState<string | null>(null);
+  /* Las transiciones del header se habilitan recién después del primer
+     paint: el estado inicial se pinta, nunca se anima. */
+  const [listo, setListo] = useState(false);
   const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setListo(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   useLayoutEffect(() => {
     const bloque = document.querySelector<HTMLElement>(overSelector);
@@ -98,6 +111,7 @@ export function Header({
   return (
     <header
       ref={ref}
+      data-listo={listo || undefined}
       className={["ac-header", sobreFoto ? "ac-header--over-photo" : "", className].filter(Boolean).join(" ")}
       {...rest}
     >

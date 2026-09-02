@@ -1,6 +1,17 @@
 /* NAVEGACIÓN — cabecera fija fina y pie ancla. */
 
 .ac-header { position: sticky; top: 0; z-index: 40; background: var(--surface-page); border-bottom: var(--line-divider); }
+
+/* Hasta el primer paint no hay transiciones: el estado inicial del header
+   se PINTA directo. Sin esta valla, la clase sobre-foto aplicada durante la
+   hidratación dispara el crossfade en plena carga y, con el hilo ocupado,
+   queda congelado a mitad de camino (logo gigante, links a medio teñir). */
+.ac-header:not([data-listo]),
+.ac-header:not([data-listo]) .ac-header__logo,
+.ac-header:not([data-listo]) .ac-header__logo-img,
+.ac-header:not([data-listo]) .ac-navlink,
+.ac-header:not([data-listo]) .ac-btn,
+.ac-header:not([data-listo]) .ac-iconbtn { transition: none !important; }
 .ac-header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); min-height: 4.5rem; }
 
 /* Monograma en dos variantes apiladas: oscura para la cabecera sólida,
@@ -10,8 +21,11 @@
    sin mover el monograma de su lugar. */
 .ac-header__logo { position: relative; display: inline-flex; align-items: center; min-height: var(--target-min); padding-inline: var(--space-xs); margin-inline: calc(-1 * var(--space-xs)); transform-origin: left center; transition: transform var(--duration-base) var(--ease-standard); }
 .ac-header__logo-img { display: block; height: 28px; width: auto; transition: opacity var(--duration-base) var(--ease-standard); }
-.ac-header__logo-img--light { position: absolute; left: 0; top: 0; opacity: 0; }
-.ac-header--over-photo .ac-header__logo { transform: scale(1.45); }
+/* Centrada en el box del logo (la oscura la centra el flex; a la absoluta
+   la centra el margin automático) — anclada arriba quedaba mordida por el
+   borde de la ventana al agrandarse. */
+.ac-header__logo-img--light { position: absolute; left: 0; inset-block: 0; margin-block: auto; opacity: 0; }
+.ac-header--over-photo .ac-header__logo { transform: scale(1.35); }
 .ac-header--over-photo .ac-header__logo-img--dark { opacity: 0; }
 .ac-header--over-photo .ac-header__logo-img--light { opacity: 1; }
 .ac-header__nav { display: none; }
