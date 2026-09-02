@@ -38,15 +38,16 @@ export function Hero() {
 
         <div className="stack-lg">
           <p className="hero-lead" data-hero-tail>
-            Hace catorce años acompaño a compradores e inversores en Buenos Aires. Trabajo una
-            operación a la vez para poder atenderte cuando aparece la pregunta difícil.
+            Hace catorce años acompaño a inversores y compradores en Buenos Aires, especializada
+            en la compra en pozo. Trabajo una operación a la vez para poder atenderte cuando
+            aparece la pregunta difícil.
           </p>
           <div className="ac-actions" data-hero-tail>
             <Button variant="solid" size="lg" href="#contacto" iconEnd={<Icon name="arrow-right" />}>
               Quiero que me contactes
             </Button>
             <Button variant="outline" size="lg" href="#emprendimiento">
-              Conocé Heredia
+              Conocé la inversión
             </Button>
           </div>
         </div>

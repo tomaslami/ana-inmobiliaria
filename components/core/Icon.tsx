@@ -43,6 +43,9 @@ const ICONS = {
     '<path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7"></path> <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path> <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4"></path> <path d="M2 7h20"></path> <path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2Z"></path>',
   bike:
     '<circle cx="18.5" cy="17.5" r="3.5"></circle> <circle cx="5.5" cy="17.5" r="3.5"></circle> <circle cx="15" cy="5" r="1"></circle> <path d="M12 17.5V14l-3-3 4-3 2 3h2"></path>',
+  pause:
+    '<rect x="14" y="4" width="4" height="16" rx="1"></rect> <rect x="6" y="4" width="4" height="16" rx="1"></rect>',
+  play: '<polygon points="6 3 20 12 6 21 6 3"></polygon>',
   ruler:
     '<path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z"></path> <path d="m14.5 12.5 2-2"></path> <path d="m11.5 9.5 2-2"></path> <path d="m8.5 6.5 2-2"></path> <path d="m17.5 15.5 2-2"></path>',
   search: '<path d="m21 21-4.34-4.34"></path> <circle cx="11" cy="11" r="8"></circle>',

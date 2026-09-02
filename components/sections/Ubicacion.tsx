@@ -1,5 +1,6 @@
 import { Button } from "../core/Button";
 import { Icon } from "../core/Icon";
+import { MapaActivable } from "../content/MapaActivable";
 import { DIRECCION, ENTORNO } from "../../lib/heredia";
 
 /**
@@ -28,12 +29,9 @@ export function Ubicacion() {
 
         <div className="mapa">
           <div className="mapa__embed" data-reveal>
-            <iframe
+            <MapaActivable
               src={DIRECCION.embedUrl}
               title="Mapa de Google con la ubicación de Heredia 1320, Villa Ortúzar"
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
 

@@ -37,7 +37,14 @@ export function Contacto() {
     if (!String(data.get("nombre") || "").trim()) next.nombre = "Necesito tu nombre para responderte.";
     if (!String(data.get("telefono") || "").trim()) next.telefono = "Dejame un teléfono o un mail para poder escribirte.";
     setErrores(next);
-    if (Object.keys(next).length === 0) setEnviado(true);
+    if (Object.keys(next).length === 0) {
+      setEnviado(true);
+      return;
+    }
+    /* El foco va al primer campo con error: en pantalla chica el mensaje
+       puede quedar fuera de vista y el envío parecería no hacer nada. */
+    const primero = next.nombre ? "nombre" : "telefono";
+    document.getElementById(primero)?.focus();
   }
 
   return (

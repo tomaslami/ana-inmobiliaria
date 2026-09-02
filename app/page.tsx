@@ -6,6 +6,8 @@ import { Emprendimiento, Proceso } from "../components/sections/Emprendimiento";
 import { Tipologias } from "../components/sections/Tipologias";
 import { Galeria } from "../components/sections/Galeria";
 import { Ubicacion } from "../components/sections/Ubicacion";
+import { Propiedades } from "../components/sections/Propiedades";
+import { Confianza } from "../components/sections/Confianza";
 import { Faq } from "../components/sections/Faq";
 import { Contacto } from "../components/sections/Contacto";
 import { Motion } from "../components/motion/Motion";
@@ -16,6 +18,7 @@ const NAV = [
   { label: "Heredia", href: "#emprendimiento" },
   { label: "Tipologías", href: "#tipologias" },
   { label: "Ubicación", href: "#ubicacion" },
+  { label: "Propiedades", href: "#propiedades" },
   { label: "Preguntas", href: "#faq" },
 ];
 
@@ -29,10 +32,12 @@ export default function Home() {
       <main>
         <Hero />
         <Sobre />
+        <Confianza />
         <Emprendimiento />
         <Tipologias />
         <Galeria />
         <Ubicacion />
+        <Propiedades />
         <Proceso />
         <Faq />
         <Contacto />
@@ -59,6 +64,7 @@ export default function Home() {
               { label: "El emprendimiento", href: "#emprendimiento" },
               { label: "Tipologías y planos", href: "#tipologias" },
               { label: "Ubicación", href: "#ubicacion" },
+              { label: "Propiedades en cartera", href: "#propiedades" },
               { label: "Preguntas frecuentes", href: "#faq" },
             ],
           },

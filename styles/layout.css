@@ -93,6 +93,12 @@
   font-size: var(--size-lead);
   line-height: var(--leading-body);
 }
+/* En teléfono las dos acciones van apiladas a lo ancho: más área de toque
+   y una base más firme que dos botones flotando a media medida. */
+.hero .ac-actions .ac-btn { flex: 1 1 100%; }
+@media (min-width: 48rem) {
+  .hero .ac-actions .ac-btn { flex: initial; }
+}
 .hero .ac-btn--outline { border-color: var(--text-on-photo); color: var(--text-on-photo); }
 .hero .ac-btn--outline:hover { background: rgba(247, 241, 230, 0.14); }
 .hero .ac-btn--solid { background: var(--cream-100); color: var(--sage-900); border-color: var(--cream-100); }
@@ -227,7 +233,7 @@
 .obra__step:first-child { padding-top: 0; }
 .obra__step:first-child .obra__dot { top: 0.4rem; }
 .obra__step[data-reached="true"] .obra__dot { background: var(--sage-900); border-color: var(--sage-900); }
-.obra__num { font-family: var(--font-body); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.obra__num { font-family: var(--font-body); font-size: var(--size-caption); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); font-variant-numeric: tabular-nums; color: var(--text-secondary); }
 .obra__title { font-family: var(--font-display); font-size: var(--size-h3); font-weight: var(--weight-medium); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); color: var(--text-primary); margin-top: var(--space-2xs); }
 .obra__text { font-family: var(--font-body); font-size: var(--size-body-sm); line-height: var(--leading-body); color: var(--text-secondary); margin-top: var(--space-sm); max-width: 34ch; }
 
@@ -260,7 +266,9 @@
 .contacto-lista > li { padding-block: var(--space-xl); }
 .contacto-canal { display: flex; flex-direction: column; gap: var(--space-2xs); min-width: 0; }
 .contacto-canal__label { font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-secondary); }
-.contacto-canal__value { font-family: var(--font-body); font-size: var(--size-h4); font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; color: var(--text-critical); text-decoration-color: var(--rule-strong); overflow-wrap: anywhere; }
+/* El padding con margen negativo lleva el área de toque a 48px sin mover
+   el renglón: el dato queda donde estaba, el dedo tiene dónde caer. */
+.contacto-canal__value { display: inline-block; font-family: var(--font-body); font-size: var(--size-h4); font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; color: var(--text-critical); text-decoration-color: var(--rule-strong); overflow-wrap: anywhere; padding-block: var(--space-xs); margin-block: calc(-1 * var(--space-xs)); }
 
 .contacto-promesa { display: flex; align-items: flex-start; gap: var(--space-sm); font-family: var(--font-body); font-size: var(--size-body-sm); line-height: var(--leading-body); color: var(--text-secondary); max-width: 36ch; }
 .contacto-promesa svg { flex: none; margin-top: 0.25rem; color: var(--sage-700); }
@@ -358,6 +366,8 @@
 .tipos__medida-nombre { font-family: var(--font-body); font-size: var(--size-body-sm); color: var(--text-primary); }
 .tipos__medida-valor { font-family: var(--font-body); font-size: var(--size-body-sm); color: var(--text-secondary); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
+/* El plano va primero — en el DOM y en pantalla: tocás la solapa y ves la
+   planta; los números la escoltan. En escritorio, cada uno a su columna. */
 .tipos__plano { margin: 0; }
 .tipos__plano-marco { background: var(--terra-100); border: var(--border-hairline) solid var(--rule-terra); }
 
@@ -366,7 +376,8 @@
 }
 @media (min-width: 62rem) {
   .tipos__panel { grid-template-columns: 5fr 7fr; gap: var(--space-3xl); align-items: start; }
-  .tipos__datos { position: sticky; top: calc(var(--header-total) + var(--space-xl)); }
+  .tipos__datos { position: sticky; top: calc(var(--header-total) + var(--space-xl)); grid-column: 1; grid-row: 1; }
+  .tipos__plano { grid-column: 2; grid-row: 1; }
 }
 
 /* Terminaciones: la letra grande del pliego, en dos columnas con filete. */
@@ -408,6 +419,17 @@
 .mapa__embed:hover iframe,
 .mapa__embed:focus-within iframe { filter: none; }
 
+/* En pantalla táctil el mapa arranca dormido: un iframe de mapa captura el
+   arrastre y atrapa el scroll de la página. El botón lo despierta. Con
+   puntero fino no existe el problema: el botón se oculta y el iframe es
+   interactivo desde el inicio. */
+.mapa__activar { position: absolute; inset: 0; display: none; align-items: flex-end; justify-content: center; padding: var(--space-md); background: transparent; border: 0; cursor: pointer; }
+.mapa__activar span { display: inline-flex; align-items: center; min-height: var(--target-min); padding: 0 var(--space-lg); background: var(--action-solid-bg); color: var(--action-solid-text); border-radius: var(--radius-sm); font-family: var(--font-label); font-size: var(--size-body-sm); font-weight: var(--weight-semibold); }
+@media (pointer: coarse) {
+  .mapa__embed iframe:not([data-activo]) { pointer-events: none; }
+  .mapa__activar { display: flex; }
+}
+
 .mapa__datos { display: flex; flex-direction: column; gap: var(--space-xl); }
 .mapa__direccion { font-family: var(--font-display); font-size: var(--size-h2); font-weight: var(--weight-medium); line-height: 1.05; letter-spacing: var(--tracking-heading); color: var(--text-critical); }
 .mapa__entorno > li { padding-block: var(--space-md); grid-template-columns: minmax(0, 1fr); }
@@ -420,4 +442,120 @@
   .mapa { grid-template-columns: 7fr 5fr; gap: var(--space-3xl); align-items: stretch; }
   /* El mapa estira hasta emparejar la columna de datos, con un piso digno. */
   .mapa__embed { aspect-ratio: auto; height: 100%; min-height: 30rem; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   CARTERA — el índice de propiedades. Filas con filete, nada de carrusel:
+   foto, dirección en serif como titular, datos tabulares y precio (o
+   "Consultar"). Toda la fila es un link. Acento salvia: es de Ana.
+   ══════════════════════════════════════════════════════════ */
+
+.cartera__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-lg); }
+.cartera__head p { color: var(--text-secondary); }
+
+.cartera__filtros { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-xl); }
+.cartera__filtro { display: inline-flex; align-items: baseline; gap: var(--space-xs); min-height: var(--target-min); padding: var(--space-sm) var(--space-md); background: transparent; border: var(--border-hairline) solid var(--rule-strong); border-radius: var(--radius-sm); cursor: pointer; font-family: var(--font-label); font-size: var(--size-body-sm); font-weight: var(--weight-semibold); color: var(--text-primary); transition: var(--transition-control); }
+.cartera__filtro:hover { border-color: var(--sage-900); }
+.cartera__filtro[aria-pressed="true"] { background: var(--surface-raised); border-color: transparent; }
+.cartera__filtro-cuenta { font-size: var(--size-caption); font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+
+.cartera__lista { list-style: none; margin: var(--space-xl) 0 0; padding: 0; border-top: var(--border-hairline) solid var(--rule-strong); }
+
+.cartera__fila {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+  grid-template-areas:
+    "foto info flecha"
+    "foto datos flecha"
+    "foto precio flecha";
+  column-gap: var(--space-md);
+  row-gap: var(--space-2xs);
+  align-items: start;
+  padding-block: var(--space-lg);
+  border-bottom: var(--line-divider);
+  text-decoration: none;
+  color: inherit;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+.cartera__fila:hover { background-color: rgba(44, 58, 48, 0.04); }
+
+/* En teléfono la foto estira hasta cubrir todo el alto de la fila
+   (los renglones de texto mandan); en escritorio vuelve al 4:3. */
+.cartera__foto { position: relative; grid-area: foto; align-self: stretch; min-height: 5.5rem; background: var(--surface-raised); overflow: hidden; }
+.cartera__foto img { transition: transform var(--duration-slow) var(--ease-out); }
+.cartera__fila:hover .cartera__foto img { transform: scale(1.04); }
+.cartera__foto-hueco { position: absolute; inset: 0; display: grid; place-items: center; border: var(--border-hairline) dashed var(--rule-strong); }
+.cartera__foto-hueco span { font-family: var(--font-label); font-size: 0.6875rem; font-weight: var(--weight-semibold); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); }
+
+/* Marca de borrador: imposible de pasar por alto, imposible de publicar sin querer. */
+.cartera__ejemplo { position: absolute; top: var(--space-2xs); left: var(--space-2xs); padding: 0.3em 0.5em; background: var(--cream-100); border: 1px dashed var(--clay-700); font-family: var(--font-label); font-size: 0.6875rem; font-weight: var(--weight-semibold); letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay-700); }
+
+.cartera__info { grid-area: info; display: flex; flex-direction: column; gap: var(--space-2xs); min-width: 0; }
+.cartera__operacion { font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-secondary); }
+.cartera__titulo { font-family: var(--font-display); font-size: var(--size-h4); font-weight: var(--weight-medium); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); color: var(--text-primary); }
+.cartera__zona { font-family: var(--font-body); font-size: var(--size-body-sm); color: var(--text-secondary); }
+
+.cartera__datos { grid-area: datos; display: flex; flex-direction: column; gap: var(--space-2xs); margin-top: var(--space-2xs); }
+.cartera__dato { font-family: var(--font-body); font-size: var(--size-body-sm); font-variant-numeric: tabular-nums; color: var(--text-primary); }
+.cartera__detalle { font-family: var(--font-body); font-size: var(--size-caption); color: var(--text-secondary); }
+
+.cartera__precio { grid-area: precio; margin-top: var(--space-2xs); font-family: var(--font-body); font-size: var(--size-body); font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; color: var(--text-critical); white-space: nowrap; }
+
+.cartera__flecha { grid-area: flecha; place-self: center; color: var(--sage-700); transition: transform var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+.cartera__fila:hover .cartera__flecha { transform: translate(3px, -3px); color: var(--sage-900); }
+
+.cartera__vacio { margin-top: var(--space-xl); padding: var(--space-2xl); border: var(--border-hairline) dashed var(--rule-strong); display: flex; flex-direction: column; gap: var(--space-sm); }
+
+@media (min-width: 62rem) {
+  .cartera__fila {
+    grid-template-columns: 13rem minmax(0, 1.3fr) minmax(0, 1fr) 11rem auto;
+    grid-template-areas: "foto info datos precio flecha";
+    align-items: center;
+    column-gap: var(--space-xl);
+  }
+  .cartera__titulo { font-size: var(--size-h3); }
+  .cartera__datos, .cartera__precio { margin-top: 0; }
+  .cartera__precio { text-align: right; font-size: var(--size-h4); }
+  .cartera__foto { align-self: center; aspect-ratio: 4 / 3; min-height: 0; }
+}
+
+/* ══════════════════════════════════════════════════════════
+   CONFIANZA — banda infinita de marcas. Marquee de CSS puro:
+   la pista lleva la lista dos veces y corre media pista por loop
+   (el medio gap extra compensa el gap entre copias). Se pausa al
+   pasar el cursor; con reduced-motion queda quieta y envuelta.
+   ══════════════════════════════════════════════════════════ */
+
+.confianza { padding-block: var(--space-2xl); overflow: clip; }
+.confianza__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-lg); }
+.confianza__rotulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-xs) var(--space-lg); }
+.confianza__head p { color: var(--text-secondary); }
+
+.confianza__banda {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.confianza__viento { display: flex; width: max-content; gap: var(--space-3xl); padding-block: var(--space-md); animation: confianza-viento 38s linear infinite; }
+.confianza__banda:hover .confianza__viento,
+.confianza__banda[data-pausado] .confianza__viento { animation-play-state: paused; }
+.confianza__lista { display: flex; align-items: center; gap: var(--space-3xl); flex: none; list-style: none; margin: 0; padding: 0; }
+.confianza__marca { flex: none; display: flex; align-items: center; }
+
+.confianza__logo { height: 2.25rem; width: auto; filter: grayscale(1); opacity: 0.75; transition: filter var(--duration-fast) var(--ease-standard), opacity var(--duration-fast) var(--ease-standard); }
+.confianza__marca:hover .confianza__logo { filter: none; opacity: 1; }
+
+.confianza__palabra { font-family: var(--font-display); font-size: var(--size-h3); font-weight: var(--weight-medium); letter-spacing: var(--tracking-heading); color: var(--sage-700); white-space: nowrap; transition: color var(--duration-fast) var(--ease-standard); }
+.confianza__marca:hover .confianza__palabra { color: var(--sage-900); }
+.confianza__marca[data-ejemplo] .confianza__palabra { font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-secondary); border: 1px dashed var(--rule-strong); border-radius: var(--radius-sm); padding: 0.6em 0.9em; }
+
+@keyframes confianza-viento { to { transform: translateX(calc(-50% - var(--space-3xl) / 2)); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .confianza__viento { animation: none; width: auto; flex-wrap: wrap; }
+  .confianza__viento .confianza__lista[aria-hidden] { display: none; }
+  .confianza__lista { flex-wrap: wrap; }
+  .confianza__banda { -webkit-mask-image: none; mask-image: none; }
+  /* Sin movimiento no hay nada que pausar. */
+  .confianza__pausa { display: none; }
 }

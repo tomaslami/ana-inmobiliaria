@@ -6,7 +6,9 @@
 /* Monograma en dos variantes apiladas: oscura para la cabecera sólida,
    crema para cuando flota sobre la foto — donde además crece un 45%.
    La escala es transform, así el crossfade no mueve el layout. */
-.ac-header__logo { position: relative; display: inline-flex; align-items: center; transform-origin: left center; transition: transform var(--duration-base) var(--ease-standard); }
+/* El padding con margen negativo agranda el área de toque a 48px
+   sin mover el monograma de su lugar. */
+.ac-header__logo { position: relative; display: inline-flex; align-items: center; min-height: var(--target-min); padding-inline: var(--space-xs); margin-inline: calc(-1 * var(--space-xs)); transform-origin: left center; transition: transform var(--duration-base) var(--ease-standard); }
 .ac-header__logo-img { display: block; height: 28px; width: auto; transition: opacity var(--duration-base) var(--ease-standard); }
 .ac-header__logo-img--light { position: absolute; left: 0; top: 0; opacity: 0; }
 .ac-header--over-photo .ac-header__logo { transform: scale(1.45); }

@@ -2,6 +2,11 @@ import { Accordion, type AccordionItem } from "../content/Accordion";
 
 const ITEMS: AccordionItem[] = [
   {
+    question: "¿Por qué conviene entrar en pozo?",
+    answer:
+      "Porque entrás al valor de obra, antes de que el edificio esté terminado, y lo pagás en etapas mientras se construye. La contracara es que comprás sobre planos y papeles — y ahí es donde me meto yo: fideicomiso, boleto y avance de obra, revisados antes de cada firma.",
+  },
+  {
     question: "¿Cobrás honorarios al comprador?",
     answer:
       "No. En la comercialización de un emprendimiento los honorarios los paga la desarrolladora. Vos pagás el valor de la unidad y los gastos de escrituración, nada más.",
@@ -29,7 +34,7 @@ const ITEMS: AccordionItem[] = [
   {
     question: "¿Cómo es la forma de pago?",
     answer:
-      "Depende de la unidad y del momento de la obra. Antes de que decidas te armo la proyección completa del esquema vigente, cuota por cuota: no quiero que te lleves sorpresas después de la firma.",
+      "Como en todo pozo, el precio y el plan van cambiando a medida que la obra avanza: cuanto antes entrás, mejores condiciones. Antes de que decidas te armo la proyección completa del esquema vigente, cuota por cuota: no quiero que te lleves sorpresas después de la firma.",
   },
 ];
 

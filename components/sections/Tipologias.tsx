@@ -152,6 +152,25 @@ export function Tipologias() {
           aria-labelledby={`tipo-tab-${activa.id}`}
           ref={panelRef}
         >
+          {/* El plano va primero en el DOM y en pantalla: es la respuesta a
+              la solapa elegida; los números lo escoltan. */}
+          <figure className="tipos__plano" data-reveal-media>
+            <div className="tipos__plano-marco" ref={planoRef}>
+              <Image
+                key={activa.id}
+                src={activa.plano}
+                alt={activa.planoAlt}
+                placeholder="blur"
+                sizes="(min-width: 62rem) 58vw, 100vw"
+                quality={82}
+                style={{ width: "100%", height: "auto" }}
+              />
+            </div>
+            <figcaption className="ac-media__caption">
+              Plano del brochure oficial — medidas y superficies orientativas.
+            </figcaption>
+          </figure>
+
           <div className="tipos__datos">
             <div data-tipo-anim>
               <p className="tipos__nombre">{activa.nombre}</p>
@@ -211,23 +230,6 @@ export function Tipologias() {
               </Button>
             </div>
           </div>
-
-          <figure className="tipos__plano" data-reveal-media>
-            <div className="tipos__plano-marco" ref={planoRef}>
-              <Image
-                key={activa.id}
-                src={activa.plano}
-                alt={activa.planoAlt}
-                placeholder="blur"
-                sizes="(min-width: 62rem) 58vw, 100vw"
-                quality={82}
-                style={{ width: "100%", height: "auto" }}
-              />
-            </div>
-            <figcaption className="ac-media__caption">
-              Plano del brochure oficial — medidas y superficies orientativas.
-            </figcaption>
-          </figure>
         </div>
 
         <div className="term" data-reveal>

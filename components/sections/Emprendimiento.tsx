@@ -11,7 +11,7 @@ const PLIEGO = [
   { label: "Tipologías", value: "Mono a 4 amb.", note: "Ocho plantas distintas, todas con balcón o terraza propia", lead: true },
   { label: "Superficies", value: "37 a 166 m²", note: "Totales, incluyendo superficie descubierta y común" },
   { label: "Terraza común", value: "Pileta + parrilla", note: "Con deck, solárium y área verde, en el último piso" },
-  { label: "Precio y pago", value: "A consultar", note: "Te paso la lista vigente y la forma de pago por WhatsApp" },
+  { label: "Precio y pago", value: "A consultar", note: "Esquema en pozo: te paso la lista vigente y la proyección de cuotas" },
 ];
 
 /* Sólo lo que figura en brochure y planos. Nada inventado. */
@@ -32,13 +32,13 @@ export function Emprendimiento() {
           <h2 className="ac-h1">Heredia — Villa Ortúzar</h2>
           <div className="ac-actions">
             <Badge>Heredia y Av. Álvarez Thomas</Badge>
-            <Badge variant="filled">Terraza con pileta</Badge>
+            <Badge variant="filled">Inversión en pozo</Badge>
           </div>
         </div>
         <p className="ac-lead" style={{ marginTop: "var(--space-lg)" }} data-reveal>
-          Veintitrés unidades en la esquina de Heredia y Av. Álvarez Thomas, donde la evolución de
-          Colegiales se encuentra con la tranquilidad de Villa Ortúzar. Un edificio de Supercielo
-          con local en planta baja, siete pisos y terraza con pileta.
+          Veintitrés unidades para entrar en pozo, en la esquina de Heredia y Av. Álvarez Thomas:
+          comprás al valor de obra, pagás mientras se construye y recibís un edificio de Supercielo
+          donde la evolución de Colegiales se encuentra con la tranquilidad de Villa Ortúzar.
         </p>
 
         <dl className="pliego" data-pliego>

@@ -21,7 +21,8 @@ import plano701 from "@/images/emprendimiento/planos/piso7-701.jpg";
 
 const WHATSAPP_NUMERO = "5491140237788";
 
-function whatsapp(mensaje: string): string {
+/** Link de WhatsApp con mensaje precargado. Lo usan también cartera y confianza. */
+export function whatsapp(mensaje: string): string {
   return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
 }
 
