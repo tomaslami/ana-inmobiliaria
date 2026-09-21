@@ -2,7 +2,6 @@
 
 import type { StaticImageData } from "next/image";
 
-import esquinaAmanecer from "@/images/emprendimiento/esquina-amanecer.jpg";
 import estarEsquina from "@/images/emprendimiento/estar-esquina.jpg";
 import unidad3amb from "@/images/emprendimiento/unidad-3amb.jpg";
 import unidad2amb from "@/images/emprendimiento/unidad-2amb.jpg";
@@ -26,13 +25,6 @@ export type ElementoGaleria =
   | (BaseGaleria & { tipo: "video"; src: string; poster: StaticImageData });
 
 export const GALERIA: ElementoGaleria[] = [
-  {
-    tipo: "foto",
-    src: esquinaAmanecer,
-    alt: "Render del edificio Heredia visto desde la esquina, al amanecer",
-    epigrafe: "La esquina de Heredia y Av. Álvarez Thomas, al amanecer.",
-    categoria: "El edificio",
-  },
   {
     tipo: "video",
     src: "/heredia/fachada-exterior.mp4",
