@@ -197,9 +197,20 @@
 .galeria__missing { position: absolute; inset: 0; display: grid; place-items: center; padding: var(--space-lg); text-align: center; background: var(--sage-950); }
 .galeria__missing span { font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-on-photo-muted); }
 
-.galeria__bar { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-lg); padding-top: var(--space-md); padding-bottom: var(--space-md); border-bottom: var(--border-hairline) solid var(--rule-on-deep); }
-.galeria__caption { font-family: var(--font-body); font-size: var(--size-body-sm); line-height: var(--leading-tight); color: var(--text-on-photo); min-height: 4rem; max-width: 44ch; }
-.galeria__nav { display: flex; gap: var(--space-xs); flex: none; }
+/* En teléfono el epígrafe va a ancho completo y las flechas bajan a su propia
+   fila: compartir el renglón con los controles le dejaba media pantalla y lo
+   partía en cinco líneas de tres palabras. Desde 48rem sí conviven en fila.
+   El min-height reserva el alto del epígrafe más largo para que las flechas
+   no salten de lugar al pasar de foto. */
+.galeria__bar { display: flex; flex-direction: column; gap: var(--space-md); padding-top: var(--space-md); padding-bottom: var(--space-md); border-bottom: var(--border-hairline) solid var(--rule-on-deep); }
+.galeria__caption { font-family: var(--font-body); font-size: var(--size-body-sm); line-height: var(--leading-tight); color: var(--text-on-photo); min-height: 4.5rem; max-width: 44ch; text-wrap: pretty; }
+.galeria__nav { display: flex; gap: var(--space-xs); flex: none; align-self: flex-end; }
+
+@media (min-width: 48rem) {
+  .galeria__bar { flex-direction: row; align-items: flex-start; justify-content: space-between; gap: var(--space-lg); }
+  .galeria__caption { min-height: 4rem; }
+  .galeria__nav { align-self: auto; }
+}
 
 .galeria__rail { display: flex; gap: var(--space-sm); margin-top: var(--space-lg); overflow-x: auto; scroll-snap-type: x proximity; scrollbar-width: thin; scrollbar-color: var(--rule-on-deep) transparent; padding-bottom: var(--space-sm); }
 .galeria__thumb { flex: none; width: 6rem; aspect-ratio: 4 / 3; padding: 0; border: 0; background: var(--sage-950); overflow: hidden; cursor: pointer; scroll-snap-align: start; opacity: 0.42; transition: opacity var(--duration-fast) var(--ease-standard); position: relative; }
