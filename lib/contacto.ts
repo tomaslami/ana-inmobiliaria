@@ -16,6 +16,9 @@ export function whatsapp(mensaje: string): string {
   return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
 }
 
+/** Mensaje del botón flotante: general, no habla de ningún emprendimiento. */
+export const WA_CONSULTA = whatsapp("Hola Ana, estoy en tu sitio y quiero hacerte una consulta.");
+
 export const TELEFONO = {
   /** Como se lee en pantalla. */
   display: "+54 9 11 4023 7788",

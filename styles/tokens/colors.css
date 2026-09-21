@@ -90,6 +90,15 @@
   --terra-100: #F3E4D7;
   --rule-terra: rgba(140, 58, 46, 0.34);
 
+  /* ── WhatsApp ─────────────────────────────────────────
+     Verde de marca de un tercero, deliberadamente fuera de la paleta. El
+     botón flotante tiene que reconocerse antes de leerse, y eso sólo lo da
+     el glifo y el color oficiales: cualquier reinterpretación en salvia lo
+     volvería un botón verde cualquiera. Vive SÓLO en .wa-fab.
+     El tono oscuro se usa sólo en hover. */
+  --whatsapp-verde: #25D366;
+  --whatsapp-verde-oscuro: #128C4A;
+
   /* ── Foco ─────────────────────────────────────────────── */
   --focus-ring: var(--sage-900);
   --focus-ring-inverse: var(--cream-200);

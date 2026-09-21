@@ -66,3 +66,47 @@
 .ac-footer__list a { display: inline-flex; align-items: center; min-height: var(--target-min); font-size: var(--size-body-sm); }
 .ac-footer__legal { display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: space-between; align-items: center; margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: var(--line-on-inverse); font-size: var(--size-caption); color: var(--text-on-inverse-muted); }
 .ac-footer__legal p { font-variant-numeric: tabular-nums; }
+
+/* Botón flotante de WhatsApp. */
+
+.wa-fab {
+  position: fixed;
+  right: var(--gutter);
+  bottom: calc(var(--gutter) + env(safe-area-inset-bottom, 0px));
+  z-index: 30;
+
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: var(--radius-pill);
+
+  background: var(--whatsapp-verde);
+  color: #FFFFFF;
+  border: 0;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition:
+    opacity var(--duration-base) var(--ease-standard),
+    transform var(--duration-base) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard),
+    visibility 0s linear var(--duration-base);
+}
+
+.wa-fab[data-visible] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.wa-fab:hover { background: var(--whatsapp-verde-oscuro); }
+.wa-fab svg { display: block; }
+
+@media (min-width: 48rem) {
+  /* En escritorio el gutter crece a 2.5rem y 4rem; el botón no necesita
+     tanto aire contra el borde ni alejarse de la esquina. */
+  .wa-fab { right: var(--space-xl); bottom: var(--space-xl); }
+}
