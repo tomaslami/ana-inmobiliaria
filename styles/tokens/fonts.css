@@ -1,11 +1,20 @@
-/* Tipografías de marca — Newsreader (display/títulos) + Source Sans 3 (cuerpo, eyebrows).
-   Pesos permitidos: 400, 500, 600. El peso 300 (Light) NO se carga a propósito.
-   Servidas vía next/font/google (self-hosted, sin @import externo) — ver app/layout.tsx,
-   que expone las variables --ac-font-newsreader y --ac-font-source-sans en <html>. */
+/* Tipografías de marca — Bodoni Moda (display/títulos) + Jost (cuerpo, eyebrows).
+   Las dos salen del logo: el monograma CAH es una Didone y el descriptor
+   "REAL ESTATE" es una geométrica muy espaciada. Reemplazaron a
+   Newsreader + Source Sans 3, que no tenían relación con la marca.
+
+   Pesos permitidos: 400, 500, 600. El 300 existe en el archivo variable
+   pero ningún token lo referencia, a propósito.
+
+   Servidas vía next/font/google (self-hosted, sin @import externo) — ver
+   app/layout.tsx, que expone --ac-font-bodoni y --ac-font-jost en <html>.
+
+   Los respaldos no son genéricos: si la fuente no carga, Didot/Bodoni MT
+   sostienen la Didone y Century Gothic/Futura sostienen la geométrica. */
 
 :root {
-  --font-display: var(--ac-font-newsreader), "Source Serif 4", Georgia, "Times New Roman", serif;
-  --font-sans: var(--ac-font-source-sans), "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-display: var(--ac-font-bodoni), Didot, "Bodoni MT", "Times New Roman", serif;
+  --font-sans: var(--ac-font-jost), "Century Gothic", Futura, "Segoe UI", system-ui, sans-serif;
   --font-body: var(--font-sans);
   --font-label: var(--font-sans);
 }

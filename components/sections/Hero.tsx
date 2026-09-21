@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "../core/Button";
 import { Icon } from "../core/Icon";
 import { MediaFrame } from "../content/MediaFrame";
+import { ANA } from "../../lib/contacto";
 import heroFoto from "@/images/emprendimiento/hero-esquina-amanecer.jpg";
 import anaRetrato from "@/images/ana-sobremi.png";
 
@@ -38,9 +39,8 @@ export function Hero() {
 
         <div className="stack-lg">
           <p className="hero-lead" data-hero-tail>
-            Hace catorce años acompaño a inversores y compradores en Buenos Aires, especializada
-            en la compra en pozo. Trabajo una operación a la vez para poder atenderte cuando
-            aparece la pregunta difícil.
+            Hace diez años acompaño a inversores y compradores en Buenos Aires, vendiendo
+            departamentos desde el pozo y terminados.
           </p>
           <div className="ac-actions" data-hero-tail>
             <Button variant="solid" size="lg" href="#contacto" iconEnd={<Icon name="arrow-right" />}>
@@ -86,7 +86,7 @@ export function Sobre() {
 
         <div className="sobre-grid">
           <div className="sobre-portrait" data-reveal-media>
-            <MediaFrame ratio="portrait" sharp caption="Ana Chaher · Matrícula CUCICBA 6.482">
+            <MediaFrame ratio="portrait" sharp caption={ANA.firma}>
               <Image
                 src={anaRetrato}
                 alt="Retrato de Ana Chaher"
@@ -101,15 +101,25 @@ export function Sobre() {
 
           <div className="stack-xl">
             <div className="stack-lg" data-reveal data-reveal-stagger>
-              <p className="ac-body">
-                Empecé en 2012 vendiendo usados en Villa Urquiza y terminé especializándome en
-                emprendimientos desde el pozo, que es donde más preguntas aparecen y menos
-                respuestas hay.
+              <p className="ac-lead">
+                Te acompaño con cuidado y empatía, paso a paso, desde la primera charla hasta que
+                tenés la llave de tu nuevo hogar en la mano.
               </p>
               <p className="ac-body">
-                No trabajo con volumen. Tomo una comercialización por vez y me involucro en todo:
-                la elección de la unidad, el análisis del fideicomiso, la negociación de la forma de
-                pago y el acompañamiento hasta la escritura.
+                Empecé en 2016 invirtiendo en pozo con los estudios de Supercielo, Generando Más y
+                Malva, siempre en Saavedra, Belgrano, Núñez, Chacarita, Villa Ortúzar y Belgrano R.
+                Terminé vendiendo también los departamentos de la desarrolladora, y así me fui
+                especializando en emprendimientos desde el pozo, que es donde más preguntas
+                aparecen y menos respuestas hay.
+              </p>
+              <p className="ac-body">
+                No trabajo con varios proyectos de pozo a la vez. Tomo una comercialización por vez
+                y me involucro en todo: la elección de la unidad, el análisis del fideicomiso, la
+                negociación de la forma de pago y el acompañamiento hasta la escritura.
+              </p>
+              <p className="ac-body">
+                También comercializo departamentos terminados de estas mismas desarrolladoras y de
+                otras, además de usados, casas y PHs. Eso me lo permitió la trayectoria.
               </p>
             </div>
 

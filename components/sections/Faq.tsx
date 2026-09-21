@@ -7,11 +7,6 @@ const ITEMS: AccordionItem[] = [
       "Porque entrás al valor de obra, antes de que el edificio esté terminado, y lo pagás en etapas mientras se construye. La contracara es que comprás sobre planos y papeles — y ahí es donde me meto yo: fideicomiso, boleto y avance de obra, revisados antes de cada firma.",
   },
   {
-    question: "¿Cobrás honorarios al comprador?",
-    answer:
-      "No. En la comercialización de un emprendimiento los honorarios los paga la desarrolladora. Vos pagás el valor de la unidad y los gastos de escrituración, nada más.",
-  },
-  {
     question: "¿Por qué no publicás los precios?",
     answer:
       "Porque cambian con el avance de obra y según la unidad, y no quiero que veas un número viejo. Me escribís, te paso la lista vigente completa con la forma de pago, y la analizamos juntos.",

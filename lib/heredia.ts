@@ -8,6 +8,9 @@
 
 import type { StaticImageData } from "next/image";
 
+/* El número y el helper de WhatsApp viven en lib/contacto.ts: son de Ana, no de Heredia. */
+import { whatsapp } from "./contacto";
+
 import planoMono from "@/images/emprendimiento/planos/monoambiente.jpg";
 import plano2amb from "@/images/emprendimiento/planos/2-ambientes.jpg";
 import plano3amb from "@/images/emprendimiento/planos/3-ambientes.jpg";
@@ -18,13 +21,6 @@ import plano603 from "@/images/emprendimiento/planos/piso6-603.jpg";
 import plano701 from "@/images/emprendimiento/planos/piso7-701.jpg";
 
 /* ── Contacto directo ──────────────────────────────────────────────── */
-
-const WHATSAPP_NUMERO = "5491140237788";
-
-/** Link de WhatsApp con mensaje precargado. Lo usan también cartera y confianza. */
-export function whatsapp(mensaje: string): string {
-  return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensaje)}`;
-}
 
 export const WA = {
   brochure: whatsapp("Hola Ana, vi Heredia en tu sitio y quiero recibir el brochure completo."),

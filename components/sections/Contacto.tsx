@@ -10,6 +10,7 @@ import { Select } from "../forms/Select";
 import { Checkbox } from "../forms/Checkbox";
 import { RadioGroup } from "../forms/RadioGroup";
 import { WA, DIRECCION } from "../../lib/heredia";
+import { AGENCIA, ANA, MAIL, TELEFONO } from "../../lib/contacto";
 
 type Errores = {
   nombre?: string;
@@ -20,9 +21,9 @@ type Errores = {
    Son datos críticos —teléfono, mail, la obra— así que van en color ancla,
    con cifra tabular y cuerpo generoso: son los titulares de esta sección. */
 const CANALES: { icon: IconName; label: string; value: string; href: string }[] = [
-  { icon: "phone", label: "Teléfono y WhatsApp", value: "+54 9 11 4023 7788", href: "tel:+5491140237788" },
-  { icon: "mail", label: "Mail", value: "hola@anachaher.com.ar", href: "mailto:hola@anachaher.com.ar" },
-  { icon: "map-pin", label: "La obra", value: "Heredia 1320, Villa Ortúzar", href: DIRECCION.mapsUrl },
+  { icon: "phone", label: "Teléfono y WhatsApp", value: TELEFONO.display, href: TELEFONO.href },
+  { icon: "mail", label: "Mail", value: MAIL.display, href: MAIL.href },
+  { icon: "map-pin", label: "La obra de Heredia", value: "Heredia 1320, Villa Ortúzar", href: DIRECCION.mapsUrl },
 ];
 
 export function Contacto() {
@@ -89,7 +90,15 @@ export function Contacto() {
               </span>
             </p>
 
-            <p className="ac-caption">Ana Chaher · Asesora inmobiliaria matriculada · CUCICBA 6.482</p>
+            <p className="ac-caption">
+              {ANA.firma}
+              <br />
+              Intermediación Inmobiliaria realizada por{" "}
+              <a href={AGENCIA.url} target="_blank" rel="noopener">
+                {AGENCIA.razonSocial}
+              </a>{" "}
+              {AGENCIA.matriculados}
+            </p>
           </div>
 
           <div className="contacto-panel" data-reveal>
@@ -102,8 +111,8 @@ export function Contacto() {
                 <p className="ac-body">
                   Te escribo por {canal.toLowerCase()} dentro de las próximas 24 horas hábiles. Si es
                   urgente, llamame al{" "}
-                  <a className="ac-data" href="tel:+5491140237788">
-                    +54 9 11 4023 7788
+                  <a className="ac-data" href={TELEFONO.href}>
+                    {TELEFONO.display}
                   </a>
                   .
                 </p>
@@ -128,12 +137,19 @@ export function Contacto() {
                     <Input id="telefono" name="telefono" type="tel" inputMode="tel" autoComplete="tel" invalid={!!errores.telefono} />
                   </Field>
                 </div>
-                <Field label="¿Qué tipo de unidad te interesa?" htmlFor="tipologia">
+                <Field label="¿Qué estás buscando?" htmlFor="tipologia">
                   <Select
                     id="tipologia"
                     name="tipologia"
                     placeholder="Elegí una opción"
-                    options={["Monoambiente", "2 ambientes", "3 ambientes", "4 ambientes", "Todavía no lo tengo definido"]}
+                    options={[
+                      "Monoambiente en Heredia",
+                      "2 ambientes en Heredia",
+                      "3 ambientes en Heredia",
+                      "4 ambientes en Heredia",
+                      "Una propiedad terminada o usada",
+                      "Todavía no lo tengo definido",
+                    ]}
                   />
                 </Field>
                 <Field label="Contame un poco más" htmlFor="mensaje" optional>
