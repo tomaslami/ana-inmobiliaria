@@ -445,78 +445,169 @@
 }
 
 /* ══════════════════════════════════════════════════════════
-   CARTERA — el índice de propiedades. Filas con filete, nada de carrusel:
-   foto, dirección en serif como titular, datos tabulares y precio (o
-   "Consultar"). Toda la fila es un link. Acento salvia: es de Ana.
+   OBRAS ENTREGADAS — grilla de portadas y visor de fotos.
+   La portada manda: la foto ocupa la tarjeta entera y el rótulo va
+   debajo, sobre la página, sin caja ni sombra. Acento salvia: estas
+   obras son de Ana, no del bloque Heredia.
    ══════════════════════════════════════════════════════════ */
 
-.cartera__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-lg); }
-.cartera__head p { color: var(--text-secondary); }
+.obras__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-lg); }
+.obras__head p { color: var(--text-secondary); }
 
-.cartera__filtros { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-xl); }
-.cartera__filtro { display: inline-flex; align-items: baseline; gap: var(--space-xs); min-height: var(--target-min); padding: var(--space-sm) var(--space-md); background: transparent; border: var(--border-hairline) solid var(--rule-strong); border-radius: var(--radius-sm); cursor: pointer; font-family: var(--font-label); font-size: var(--size-body-sm); font-weight: var(--weight-semibold); color: var(--text-primary); transition: var(--transition-control); }
-.cartera__filtro:hover { border-color: var(--sage-900); }
-.cartera__filtro[aria-pressed="true"] { background: var(--surface-raised); border-color: transparent; }
-.cartera__filtro-cuenta { font-size: var(--size-caption); font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+.obras__grilla { list-style: none; margin: var(--space-2xl) 0 0; padding: 0; display: grid; gap: var(--space-xl); }
 
-.cartera__lista { list-style: none; margin: var(--space-xl) 0 0; padding: 0; border-top: var(--border-hairline) solid var(--rule-strong); }
-
-.cartera__fila {
-  display: grid;
-  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
-  grid-template-areas:
-    "foto info flecha"
-    "foto datos flecha"
-    "foto precio flecha";
-  column-gap: var(--space-md);
-  row-gap: var(--space-2xs);
-  align-items: start;
-  padding-block: var(--space-lg);
-  border-bottom: var(--line-divider);
-  text-decoration: none;
+/* Toda la portada es el control: botón sin apariencia de botón. */
+.obras__obra {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
   color: inherit;
-  transition: background-color var(--duration-fast) var(--ease-standard);
 }
-.cartera__fila:hover { background-color: rgba(44, 58, 48, 0.04); }
 
-/* En teléfono la foto estira hasta cubrir todo el alto de la fila
-   (los renglones de texto mandan); en escritorio vuelve al 4:3. */
-.cartera__foto { position: relative; grid-area: foto; align-self: stretch; min-height: 5.5rem; background: var(--surface-raised); overflow: hidden; }
-.cartera__foto img { transition: transform var(--duration-slow) var(--ease-out); }
-.cartera__fila:hover .cartera__foto img { transform: scale(1.04); }
-.cartera__foto-hueco { position: absolute; inset: 0; display: grid; place-items: center; border: var(--border-hairline) dashed var(--rule-strong); }
-.cartera__foto-hueco span { font-family: var(--font-label); font-size: 0.6875rem; font-weight: var(--weight-semibold); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); }
+.obras__foto { position: relative; display: block; aspect-ratio: 4 / 5; background: var(--surface-raised); overflow: hidden; }
+.obras__foto img { transition: transform var(--duration-slow) var(--ease-out); }
+.obras__obra:hover .obras__foto img { transform: scale(1.04); }
 
-/* Marca de borrador: imposible de pasar por alto, imposible de publicar sin querer. */
-.cartera__ejemplo { position: absolute; top: var(--space-2xs); left: var(--space-2xs); padding: 0.3em 0.5em; background: var(--cream-100); border: 1px dashed var(--clay-700); font-family: var(--font-label); font-size: 0.6875rem; font-weight: var(--weight-semibold); letter-spacing: 0.1em; text-transform: uppercase; color: var(--clay-700); }
+.obras__pie { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-md); padding-top: var(--space-md); border-top: var(--border-hairline) solid var(--rule-strong); margin-top: var(--space-md); }
+.obras__info { display: flex; flex-direction: column; gap: var(--space-2xs); min-width: 0; }
+.obras__nombre { font-family: var(--font-display); font-size: var(--size-h4); font-weight: var(--weight-medium); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); color: var(--text-primary); }
+.obras__barrio { font-family: var(--font-body); font-size: var(--size-body-sm); color: var(--text-secondary); }
+.obras__flecha { flex: none; color: var(--sage-700); transition: transform var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
+.obras__obra:hover .obras__flecha { transform: translate(3px, -3px); color: var(--sage-900); }
 
-.cartera__info { grid-area: info; display: flex; flex-direction: column; gap: var(--space-2xs); min-width: 0; }
-.cartera__operacion { font-family: var(--font-label); font-size: var(--size-eyebrow); font-weight: var(--weight-semibold); letter-spacing: var(--tracking-eyebrow); text-transform: uppercase; color: var(--text-secondary); }
-.cartera__titulo { font-family: var(--font-display); font-size: var(--size-h4); font-weight: var(--weight-medium); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); color: var(--text-primary); }
-.cartera__zona { font-family: var(--font-body); font-size: var(--size-body-sm); color: var(--text-secondary); }
-
-.cartera__datos { grid-area: datos; display: flex; flex-direction: column; gap: var(--space-2xs); margin-top: var(--space-2xs); }
-.cartera__dato { font-family: var(--font-body); font-size: var(--size-body-sm); font-variant-numeric: tabular-nums; color: var(--text-primary); }
-.cartera__detalle { font-family: var(--font-body); font-size: var(--size-caption); color: var(--text-secondary); }
-
-.cartera__precio { grid-area: precio; margin-top: var(--space-2xs); font-family: var(--font-body); font-size: var(--size-body); font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; color: var(--text-critical); white-space: nowrap; }
-
-.cartera__flecha { grid-area: flecha; place-self: center; color: var(--sage-700); transition: transform var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard); }
-.cartera__fila:hover .cartera__flecha { transform: translate(3px, -3px); color: var(--sage-900); }
-
-.cartera__vacio { margin-top: var(--space-xl); padding: var(--space-2xl); border: var(--border-hairline) dashed var(--rule-strong); display: flex; flex-direction: column; gap: var(--space-sm); }
-
+@media (min-width: 40rem) {
+  .obras__grilla { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (min-width: 62rem) {
-  .cartera__fila {
-    grid-template-columns: 13rem minmax(0, 1.3fr) minmax(0, 1fr) 11rem auto;
-    grid-template-areas: "foto info datos precio flecha";
+  .obras__grilla { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2xl) var(--space-xl); }
+  .obras__nombre { font-size: var(--size-h3); }
+}
+
+/* ── Visor ─────────────────────────────────────────────────
+   <dialog> nativo: el foco y Esc los maneja el elemento. Acá sólo
+   se define el aspecto — superficie profunda, como la galería, para
+   que la fotografía sea lo único iluminado de la pantalla. */
+
+.visor {
+  width: min(100vw, 76rem);
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: var(--surface-deep);
+  color: var(--text-on-photo);
+  /* El <dialog> scrollea por defecto. Mientras la caja entra desplazada se
+     desborda unos pocos píxeles y el navegador saca una barra que corre todo
+     el contenido y desaparece sola: el visor entero pegaba un salto. Acá no
+     hay nada que scrollear —la caja mide 100% y reparte en filas—, así que
+     el desborde es siempre transitorio o de redondeo. */
+  overflow: hidden;
+}
+/* Apertura y cierre, en CSS y no en JS: son la primera animación de la
+   pantalla y no pueden depender de que un reloj de JS llegue a arrancar.
+   Con reduced-motion los tokens las anulan solas. */
+.visor::backdrop { background: rgba(22, 32, 26, 0.92); }
+.visor[open]::backdrop { animation: visor-velo var(--duration-base) var(--ease-standard); }
+.visor[open] .visor__caja { animation: visor-entra var(--duration-slow) var(--ease-out); }
+
+/* El diálogo espera a que la caja termine de bajar antes de irse (SALIDA_MS
+   en Terminados.tsx). `forwards` sostiene el último cuadro mientras tanto. */
+.visor[data-cerrando] .visor__caja { animation: visor-sale var(--duration-base) var(--ease-standard) forwards; }
+.visor[data-cerrando]::backdrop { animation: visor-velo var(--duration-base) var(--ease-standard) reverse forwards; }
+
+@keyframes visor-velo {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* La caja sube apenas. El desplazamiento la saca unos píxeles por abajo del
+   diálogo, que está en overflow:hidden — no se ve, porque en ese tramo la
+   opacidad todavía está cerca de cero. */
+@keyframes visor-entra {
+  from { opacity: 0; transform: translateY(20px) scale(0.985); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes visor-sale {
+  from { opacity: 1; transform: none; }
+  to { opacity: 0; transform: translateY(12px); }
+}
+
+.visor__caja {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  height: 100%;
+  padding: var(--space-md) var(--gutter) var(--space-md);
+}
+
+/* En teléfono el nombre de la obra se lleva el ancho entero salvo el botón de
+   cerrar, y el contador baja a la línea de abajo. Compartiendo renglón con el
+   contador y la X, un nombre como "Proyecto Teodoro García" quedaba partido y
+   apretado contra los controles. Desde 48rem los tres vuelven a la misma fila. */
+.visor__barra {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "rotulo cerrar"
+    "cuenta cerrar";
+  align-items: start;
+  column-gap: var(--space-md);
+  row-gap: var(--space-xs);
+  padding-bottom: var(--space-md);
+  border-bottom: var(--border-hairline) solid var(--rule-on-deep);
+}
+.visor__rotulo { grid-area: rotulo; min-width: 0; }
+.visor__barra > .ac-iconbtn { grid-area: cerrar; }
+.visor__obra { font-family: var(--font-display); font-size: var(--size-h4); font-weight: var(--weight-medium); line-height: var(--leading-heading); letter-spacing: var(--tracking-heading); color: var(--text-on-photo); text-wrap: balance; }
+.visor__barrio { font-family: var(--font-body); font-size: var(--size-body-sm); color: var(--text-on-photo-muted); }
+.visor__cuenta { grid-area: cuenta; font-family: var(--font-body); font-size: var(--size-body-sm); font-weight: var(--weight-semibold); font-variant-numeric: tabular-nums; letter-spacing: 0.06em; color: var(--text-on-photo-muted); }
+
+/* `contain` y no `cover`: son fotos de arquitectura mezclando apaisado y
+   vertical, y recortarlas para emparejar la caja sería editar la obra. */
+.visor__escena { position: relative; min-height: 0; touch-action: pan-y; }
+.visor__slide { position: absolute; inset: 0; opacity: 0; }
+.visor__slide[data-activa] { opacity: 1; }
+
+/* Mismo criterio que la galería: en teléfono el epígrafe ocupa el ancho entero
+   y las flechas bajan. El min-height reserva el alto del epígrafe más largo
+   para que las flechas no se muevan de foto en foto — son el control que más
+   se toca y tiene que quedar siempre en el mismo lugar. */
+.visor__pie { display: flex; flex-direction: column; gap: var(--space-sm); padding-top: var(--space-md); }
+.visor__epigrafe { font-family: var(--font-body); font-size: var(--size-body-sm); line-height: var(--leading-tight); color: var(--text-on-photo); max-width: 48ch; min-height: 4.25rem; text-wrap: pretty; }
+.visor__nav { display: flex; gap: var(--space-xs); flex: none; align-self: flex-end; }
+
+@media (min-width: 48rem) {
+  .visor__barra {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-areas: "rotulo cuenta cerrar";
     align-items: center;
-    column-gap: var(--space-xl);
+    column-gap: var(--space-lg);
   }
-  .cartera__titulo { font-size: var(--size-h3); }
-  .cartera__datos, .cartera__precio { margin-top: 0; }
-  .cartera__precio { text-align: right; font-size: var(--size-h4); }
-  .cartera__foto { align-self: center; aspect-ratio: 4 / 3; min-height: 0; }
+  .visor__pie { flex-direction: row; align-items: flex-start; justify-content: space-between; gap: var(--space-lg); }
+  .visor__epigrafe { min-height: 2.5rem; }
+  .visor__nav { align-self: auto; }
+}
+
+.visor__rail { display: flex; gap: var(--space-sm); margin-top: var(--space-md); overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--rule-on-deep) transparent; padding-bottom: var(--space-2xs); }
+.visor__thumb { position: relative; flex: none; width: 5rem; aspect-ratio: 4 / 3; padding: 0; border: 0; background: var(--sage-1000); overflow: hidden; cursor: pointer; opacity: 0.42; transition: opacity var(--duration-fast) var(--ease-standard); }
+.visor__thumb:hover { opacity: 0.8; }
+.visor__thumb[aria-current="true"] { opacity: 1; }
+.visor__thumb[aria-current="true"]::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: var(--cream-100); }
+
+.visor .ac-iconbtn { color: var(--text-on-photo); border-color: var(--rule-on-deep); }
+.visor .ac-iconbtn:hover { background: rgba(247, 241, 230, 0.12); }
+.visor :focus-visible { outline-color: var(--focus-ring-inverse); }
+
+/* El rail de miniaturas es una comodidad, no el único camino: en pantalla
+   chica las flechas y el arrastre alcanzan, y el alto es escaso. */
+@media (max-height: 34rem) {
+  .visor__rail { display: none; }
 }
 
 /* ══════════════════════════════════════════════════════════

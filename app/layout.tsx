@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: "Ana Chaher — Asesora inmobiliaria en Buenos Aires",
   description:
-    "Asesora inmobiliaria matriculada (CUCICBA 6.482). Inversión en pozo en Heredia, un edificio de Supercielo en Villa Ortúzar: monoambientes a 4 ambientes con terraza, pileta y parrilla.",
+    "Diez años vendiendo departamentos desde el pozo y terminados en Buenos Aires. Hoy comercializo Heredia, un edificio de Supercielo en Villa Ortúzar. Intermediación Inmobiliaria realizada por Premier Real Estate S.A.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
