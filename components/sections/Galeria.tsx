@@ -4,29 +4,31 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { IconButton } from "../core/IconButton";
+import { Icon } from "../core/Icon";
 import { GALERIA } from "../../lib/galeria";
 
 /**
  * Galería del emprendimiento — el pico oscuro de la página.
  *
- * Superficie profunda para que la fotografía sea lo único iluminado del
- * bloque. El cruce entre fotos es direccional: la que entra se desplaza
+ * Superficie profunda para que los renders sean lo único iluminado del
+ * bloque. El cruce entre elementos es direccional: el que entra se desplaza
  * apenas desde el lado hacia el que navegás y la que sale cede en sentido
  * contrario. Contador y epígrafe acompañan con un relevo corto.
  *
  * En pantalla táctil el escenario acepta arrastre horizontal. Sin JS queda
- * la primera foto visible con su epígrafe: nada se pierde.
+ * la primera imagen visible con su epígrafe: nada se pierde.
  *
- * Sólo se montan las fotos cercanas a la actual: dieciséis imágenes a
- * pantalla completa no se cargan todas juntas.
+ * Sólo se montan los elementos cercanos al actual. Los videos inactivos
+ * se pausan para evitar reproducción y descarga innecesarias.
  */
 
-const VENTANA = 1; // cuántas fotos se precargan a cada lado
+const VENTANA = 1; // cuántos elementos se precargan a cada lado
 
 export function Galeria() {
   const [indice, setIndice] = useState(0);
   const [montadas, setMontadas] = useState<Set<number>>(() => new Set([0, 1]));
   const slidesRef = useRef<(HTMLDivElement | null)[]>([]);
+  const videosRef = useRef<(HTMLVideoElement | null)[]>([]);
   const railRef = useRef<HTMLDivElement | null>(null);
   const captionRef = useRef<HTMLParagraphElement | null>(null);
   const countRef = useRef<HTMLSpanElement | null>(null);
@@ -35,7 +37,7 @@ export function Galeria() {
   const gestoRef = useRef<{ x: number; y: number } | null>(null);
 
   const total = GALERIA.length;
-  const foto = GALERIA[indice];
+  const elemento = GALERIA[indice];
 
   const ir = useCallback(
     (siguiente: number, dir?: 1 | -1) => {
@@ -54,7 +56,7 @@ export function Galeria() {
     [total],
   );
 
-  /* Cruce direccional entre fotos + relevo de contador y epígrafe. */
+  /* Cruce direccional entre elementos + relevo de contador y epígrafe. */
   useEffect(() => {
     const anterior = previoRef.current;
     previoRef.current = indice;
@@ -80,10 +82,23 @@ export function Galeria() {
     return () => ctx.revert();
   }, [indice]);
 
-  /* El riel sigue a la foto activa.
+  useEffect(() => {
+    const movimientoReducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    videosRef.current.forEach((video, i) => {
+      if (!video) return;
+      if (i === indice && !movimientoReducido) {
+        video.currentTime = 0;
+        void video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, [indice]);
+
+  /* El riel sigue al elemento activo.
      Se mueve el scroll del riel a mano y no con scrollIntoView: ese arrastra
      TODOS los contenedores con scroll, incluido el documento, así que al cambiar
-     de foto la página entera se corría sola. */
+     de elemento la página entera se corría sola. */
   useEffect(() => {
     const riel = railRef.current;
     const activo = riel?.children[indice] as HTMLElement | undefined;
@@ -131,7 +146,7 @@ export function Galeria() {
               Heredia, en imágenes.
             </h2>
             <p className="ac-body-sm">
-              Los renders del proyecto, en un recorrido: el edificio, las unidades y la terraza.
+              Fotos y videos render del proyecto: el edificio, las unidades y la terraza.
             </p>
           </div>
           <p className="galeria__count" aria-hidden="true">
@@ -159,17 +174,34 @@ export function Galeria() {
                   slidesRef.current[i] = el;
                 }}
                 aria-hidden={!visible}
+                inert={!visible}
               >
-                <Image
-                  src={f.src}
-                  alt={f.alt}
-                  fill
-                  sizes="100vw"
-                  priority={i === 0}
-                  quality={82}
-                  placeholder="blur"
-                  style={{ objectFit: "cover" }}
-                />
+                {f.tipo === "foto" ? (
+                  <Image
+                    src={f.src}
+                    alt={f.alt}
+                    fill
+                    sizes="100vw"
+                    priority={i === 0}
+                    quality={82}
+                    placeholder="blur"
+                    style={{ objectFit: "cover" }}
+                  />
+                ) : (
+                  <video
+                    ref={(el) => {
+                      videosRef.current[i] = el;
+                    }}
+                    src={f.src}
+                    poster={f.poster.src}
+                    aria-label={f.alt}
+                    controls
+                    loop
+                    muted
+                    playsInline
+                    preload="none"
+                  />
+                )}
               </div>
             );
           })}
@@ -180,29 +212,29 @@ export function Galeria() {
         <div className="galeria__bar">
           <p className="galeria__caption" aria-live="polite" ref={captionRef}>
             <span className="ac-eyebrow" style={{ color: "var(--text-on-photo-muted)" }}>
-              {foto.categoria} · {posicion}
+              {elemento.categoria} · {posicion}
             </span>
             <br />
-            {foto.epigrafe}
+            {elemento.epigrafe}
           </p>
           <div className="galeria__nav">
-            <IconButton icon="chevron-left" label="Foto anterior" bordered onClick={() => ir(indice - 1, -1)} />
-            <IconButton icon="chevron-right" label="Foto siguiente" bordered onClick={() => ir(indice + 1, 1)} />
+            <IconButton icon="chevron-left" label="Elemento anterior" bordered onClick={() => ir(indice - 1, -1)} />
+            <IconButton icon="chevron-right" label="Elemento siguiente" bordered onClick={() => ir(indice + 1, 1)} />
           </div>
         </div>
 
-        <div className="galeria__rail" ref={railRef} aria-label="Fotos del emprendimiento" role="group">
+        <div className="galeria__rail" ref={railRef} aria-label="Fotos y videos del emprendimiento" role="group">
           {GALERIA.map((f, i) => (
             <button
               key={f.epigrafe}
               type="button"
               className="galeria__thumb"
               aria-current={i === indice ? "true" : undefined}
-              aria-label={`Ver foto ${i + 1} de ${total}: ${f.epigrafe}`}
+              aria-label={`Ver ${f.tipo === "video" ? "video" : "foto"} ${i + 1} de ${total}: ${f.epigrafe}`}
               onClick={() => ir(i)}
             >
               <Image
-                src={f.src}
+                src={f.tipo === "foto" ? f.src : f.poster}
                 alt=""
                 width={170}
                 height={128}
@@ -211,6 +243,11 @@ export function Galeria() {
                 placeholder="blur"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
+              {f.tipo === "video" && (
+                <span className="galeria__thumb-video" aria-hidden="true">
+                  <Icon name="play" size={18} />
+                </span>
+              )}
             </button>
           ))}
         </div>

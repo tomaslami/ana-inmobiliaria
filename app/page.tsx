@@ -10,6 +10,7 @@ import { Terminados } from "../components/sections/Terminados";
 import { Faq } from "../components/sections/Faq";
 import { Contacto } from "../components/sections/Contacto";
 import { Motion } from "../components/motion/Motion";
+import { WhatsAppFab } from "../components/navigation/WhatsAppFab";
 import { SUPERCIELO_URL } from "../lib/heredia";
 import { AGENCIA, ANA, MAIL, TELEFONO } from "../lib/contacto";
 
@@ -46,6 +47,7 @@ export default function Home() {
         <Contacto />
       </main>
       <Motion />
+      <WhatsAppFab />
       <Footer
         legal="© 2026 Ana Chaher. Todos los derechos reservados."
         matricula={
