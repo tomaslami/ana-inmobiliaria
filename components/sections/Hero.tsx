@@ -101,7 +101,10 @@ export function Sobre() {
 
           <div className="stack-xl">
             <div className="stack-lg" data-reveal data-reveal-stagger>
-              <p className="ac-lead">
+              {/* Los cuatro párrafos van en el mismo rol: mismo cuerpo, mismo
+                  color y la misma medida. Este abría con ac-lead y se leía como
+                  un bloque aparte; la jerarquía de la sección ya la da el h2. */}
+              <p className="ac-body">
                 Te acompaño con cuidado y empatía, paso a paso, desde la primera charla hasta que
                 tenés la llave de tu nuevo hogar en la mano.
               </p>
