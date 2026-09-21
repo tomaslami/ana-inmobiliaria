@@ -3,6 +3,15 @@
    Solo pesos 400 / 500 / 600. El 300 está prohibido.
    El cuerpo NUNCA va en serif.
 
+   Medido con las familias actuales (Bodoni Moda + Jost): el cuerpo entra a
+   ~69 caracteres de prosa por línea, dentro del rango cómodo de 45–75.
+   (Son 58 si se mide con la unidad `ch` de CSS, que es el ancho del cero y
+   corre más ancho que la minúscula media: la medida de prosa es la que
+   importa acá.) La altura de x de Jost es 0,46 em, así que a 18px el ojo
+   medio queda en 8,3px: apenas por debajo de la sans anterior, pero holgado.
+   Si alguna vez se ve chico, el ajuste correcto es subir --size-body a
+   1.1875rem, no apretar la medida.
+
    Los tres roles grandes (display, h1, mega) escalan con clamp en vez de
    saltar en el breakpoint: entre 480 y 1440 el titular crece con la ventana,
    que es lo que hace que la página no se lea "armada en dos tamaños". */
@@ -37,9 +46,14 @@
   --leading-body: 1.6;
   --leading-tight: 1.35;
 
-  /* Tracking — el piso del sistema es -0.03em. */
-  --tracking-display: -0.028em;
-  --tracking-heading: -0.018em;
+  /* Tracking — el piso del sistema es -0.03em.
+     Los valores se aflojaron al pasar a Bodoni Moda: una Didone tiene serifas
+     planas que sobresalen y hairlines finas, así que el apretado que le venía
+     bien a una serif de texto acá empasta los remates. Se compensa además que
+     Bodoni corre ~14% más ancha, así que el titular ya no necesita que la
+     interletra lo cierre. */
+  --tracking-display: -0.01em;
+  --tracking-heading: -0.004em;
   --tracking-body: 0;
   --tracking-eyebrow: 0.18em; /* replica el trato de "REAL ESTATE" del logo */
 
@@ -112,3 +126,17 @@
 .ac-body-sm { font-family: var(--font-body); font-size: var(--size-body-sm); line-height: var(--leading-body); color: var(--text-secondary); }
 .ac-caption { font-family: var(--font-body); font-size: var(--size-caption); line-height: var(--leading-tight); color: var(--text-secondary); }
 .ac-data { font-family: var(--font-body); font-variant-numeric: tabular-nums; font-weight: var(--weight-semibold); color: var(--text-critical); }
+
+/* Compensación sobre fondo oscuro.
+   Una Didone es casi toda contraste: sobre el ancla, las hairlines se
+   adelgazan ópticamente y las serifas planas de letras vecinas se pegan.
+   Un pelo de interletra las despega sin tocar peso ni tamaño.
+   Se redefine el TOKEN dentro del ámbito oscuro en vez de escribir una regla
+   por rol: así alcanza a display, h1..h4 y a cualquier rol que se sume
+   después, sin pelear especificidad con las clases de rol. */
+.ac-on-inverse,
+.galeria,
+.visor {
+  --tracking-display: -0.004em;
+  --tracking-heading: 0.002em;
+}
