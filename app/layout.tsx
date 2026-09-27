@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Jost } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.css";
+
+/* Contenedor de Google Tag Manager del sitio. */
+const GTM_ID = "GTM-NXWFNK55";
 
 /* Las dos familias salen del logo, no del gusto: el monograma CAH es una
    Didone (asta gruesa, serifa plana sin corchete, hairline fina) y el
@@ -36,7 +40,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es-AR" className={`${bodoniModa.variable} ${jost.variable}`}>
-      <body>{children}</body>
+      <GoogleTagManager gtmId={GTM_ID} />
+      <body>
+        {/* Respaldo de GTM para navegadores sin JavaScript. */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }
