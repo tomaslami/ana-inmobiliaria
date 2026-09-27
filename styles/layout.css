@@ -95,8 +95,8 @@
 }
 /* En teléfono las dos acciones van apiladas a lo ancho: más área de toque
    y una base más firme que dos botones flotando a media medida. */
-/* El botón de Heredia lleva un texto largo: en celular parte en dos líneas,
-   así que se centra y respira en vez de quedar apretado al alto fijo. */
+/* En celulares angostos los textos de los botones pueden partir en dos
+   líneas: se centran y respiran en vez de quedar apretados al alto fijo. */
 .hero .ac-actions .ac-btn {
   flex: 1 1 100%;
   text-align: center;
