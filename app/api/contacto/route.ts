@@ -6,15 +6,15 @@
  * responde directo desde su casilla.
  *
  * ▸ Variable de entorno: RESEND_API_KEY (se carga en Vercel).
- * ▸ REMITENTE: mientras no haya un dominio propio verificado en Resend se usa
- *   onboarding@resend.dev, que SÓLO entrega a la casilla dueña de la cuenta
- *   de Resend. Con dominio verificado, cambiar REMITENTE por uno de ese dominio.
+ * ▸ REMITENTE: sale del dominio anachaher.com, verificado en Resend. Si se
+ *   cambia, tiene que ser una dirección de un dominio verificado en la cuenta:
+ *   con cualquier otro, Resend rechaza el envío (403 validation_error).
  */
 
 import { Resend } from "resend";
 import { MAIL } from "../../../lib/contacto";
 
-const REMITENTE = "Sitio de Ana Chaher <onboarding@resend.dev>";
+const REMITENTE = "Sitio de Ana Chaher <consultas@anachaher.com>";
 /** Las consultas llegan al mail de Ana en Century 21: ana.chaher@c21premier.com.ar */
 const DESTINO = MAIL.display;
 
