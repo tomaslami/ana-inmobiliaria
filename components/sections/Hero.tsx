@@ -47,7 +47,7 @@ export function Hero() {
               Quiero que me contactes
             </Button>
             <Button variant="outline" size="lg" href="#emprendimiento">
-              Conocé el nuevo emprendimiento de Supercielo: Heredia
+              Conocé el nuevo emprendimiento
             </Button>
           </div>
         </div>
