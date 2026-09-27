@@ -30,22 +30,58 @@ export function Contacto() {
   const [enviado, setEnviado] = useState(false);
   const [canal, setCanal] = useState("WhatsApp");
   const [errores, setErrores] = useState<Errores>({});
+  const [enviando, setEnviando] = useState(false);
+  const [fallo, setFallo] = useState(false);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  /* El foco va al primer campo con error: en pantalla chica el mensaje
+     puede quedar fuera de vista y el envío parecería no hacer nada. */
+  function marcarErrores(next: Errores) {
+    setErrores(next);
+    const primero = next.nombre ? "nombre" : "telefono";
+    document.getElementById(primero)?.focus();
+  }
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (enviando) return;
     const data = new FormData(e.currentTarget);
     const next: Errores = {};
     if (!String(data.get("nombre") || "").trim()) next.nombre = "Necesito tu nombre para responderte.";
     if (!String(data.get("telefono") || "").trim()) next.telefono = "Dejame un teléfono o un mail para poder escribirte.";
-    setErrores(next);
-    if (Object.keys(next).length === 0) {
-      setEnviado(true);
+    if (Object.keys(next).length > 0) {
+      marcarErrores(next);
       return;
     }
-    /* El foco va al primer campo con error: en pantalla chica el mensaje
-       puede quedar fuera de vista y el envío parecería no hacer nada. */
-    const primero = next.nombre ? "nombre" : "telefono";
-    document.getElementById(primero)?.focus();
+    setErrores({});
+    setFallo(false);
+    setEnviando(true);
+    try {
+      const res = await fetch("/api/contacto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: data.get("nombre"),
+          telefono: data.get("telefono"),
+          tipologia: data.get("tipologia"),
+          mensaje: data.get("mensaje"),
+          canal,
+          consentimiento: data.get("consentimiento") === "on",
+          empresa: data.get("empresa"),
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && json.ok) {
+        setEnviado(true);
+      } else if (json.error === "validacion" && json.errores) {
+        marcarErrores(json.errores);
+      } else {
+        setFallo(true);
+      }
+    } catch {
+      setFallo(true);
+    } finally {
+      setEnviando(false);
+    }
   }
 
   return (
@@ -163,9 +199,34 @@ export function Contacto() {
                   onChange={setCanal}
                 />
                 <Checkbox id="consentimiento" name="consentimiento" label="Autorizo que me contacten por este medio." defaultChecked />
+                {/* Trampa para bots: invisible y fuera del orden de tabulación. */}
+                <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+                  <label htmlFor="empresa">Empresa</label>
+                  <input id="empresa" name="empresa" type="text" tabIndex={-1} autoComplete="off" />
+                </div>
                 <div className="contacto-panel__pie">
-                  <Button variant="solid" size="lg" type="submit" fullWidth iconEnd={<Icon name="arrow-right" />}>
-                    Enviar la consulta
+                  {fallo && (
+                    <p className="ac-field__error" role="alert">
+                      <Icon name="x" size={16} />
+                      <span>
+                        No pude enviar la consulta. Probá de nuevo o escribime por{" "}
+                        <a href={WA.precios} target="_blank" rel="noopener">
+                          WhatsApp
+                        </a>
+                        .
+                      </span>
+                    </p>
+                  )}
+                  <Button
+                    variant="solid"
+                    size="lg"
+                    type="submit"
+                    fullWidth
+                    disabled={enviando}
+                    aria-busy={enviando}
+                    iconEnd={enviando ? undefined : <Icon name="arrow-right" />}
+                  >
+                    {enviando ? "Enviando…" : "Enviar la consulta"}
                   </Button>
                   <p className="ac-caption">Uso tus datos sólo para responderte esta consulta.</p>
                 </div>

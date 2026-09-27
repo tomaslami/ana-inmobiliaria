@@ -5,11 +5,10 @@
  * archivo y cambia en los cuatro lugares donde aparece (retrato, sección de
  * contacto, pie y metadatos), sin salir a buscarlo por el código.
  *
- * ▸ PENDIENTE DE CONFIRMAR: TELEFONO y MAIL vienen del armado original y
- *   nunca se verificaron con Ana. Revisarlos antes de publicar.
+ * TELEFONO y MAIL confirmados por Ana: su celular y su mail de Century 21.
  */
 
-const WHATSAPP_NUMERO = "5491140237788";
+const WHATSAPP_NUMERO = "5491165980935";
 
 /** Link de WhatsApp con el mensaje ya escrito. */
 export function whatsapp(mensaje: string): string {
@@ -21,13 +20,13 @@ export const WA_CONSULTA = whatsapp("Hola Ana, estoy en tu sitio y quiero hacert
 
 export const TELEFONO = {
   /** Como se lee en pantalla. */
-  display: "+54 9 11 4023 7788",
-  href: "tel:+5491140237788",
+  display: "+54 9 11 6598 0935",
+  href: "tel:+5491165980935",
 };
 
 export const MAIL = {
-  display: "hola@anachaher.com.ar",
-  href: "mailto:hola@anachaher.com.ar",
+  display: "ana.chaher@c21premier.com.ar",
+  href: "mailto:ana.chaher@c21premier.com.ar",
 };
 
 /* ── Identificación profesional ────────────────────────────────────── */
