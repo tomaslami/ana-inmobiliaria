@@ -66,7 +66,11 @@ export function Header({
     if (!bloque) return;
     const sincronizar = () => {
       const alto = ref.current?.offsetHeight ?? 0;
-      setSobreFoto(window.scrollY < bloque.offsetHeight - alto);
+      const sobre = window.scrollY < bloque.offsetHeight - alto;
+      setSobreFoto(sobre);
+      /* En mobile la cabecera se esconde sobre la foto: si el cajón quedó
+         abierto al volver arriba, se cierra con ella. */
+      if (sobre) setOpen(false);
     };
     sincronizar();
     window.addEventListener("scroll", sincronizar, { passive: true });

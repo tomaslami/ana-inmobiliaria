@@ -29,7 +29,12 @@ const ITEMS: AccordionItem[] = [
   {
     question: "¿Cómo es la forma de pago?",
     answer:
-      "Como en todo pozo, el precio y el plan van cambiando a medida que la obra avanza: cuanto antes entrás, mejores condiciones. Antes de que decidas te armo la proyección completa del esquema vigente, cuota por cuota: no quiero que te lleves sorpresas después de la firma.",
+      "Se ingresa con un 40% de anticipo y el saldo se paga en cuotas mientras avanza la obra. Como en todo pozo, el precio y el plan cambian con el avance: cuanto antes entrás, mejores condiciones. Antes de que decidas te armo la proyección completa, cuota por cuota.",
+  },
+  {
+    question: "¿Toman mi propiedad como parte de pago?",
+    answer:
+      "Sí. Tomamos tu departamento, casa o PH como parte de pago de una unidad en Heredia. Contame qué tenés y te digo cómo puede funcionar en tu caso.",
   },
 ];
 

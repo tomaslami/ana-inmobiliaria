@@ -11,6 +11,7 @@ import { Checkbox } from "../forms/Checkbox";
 import { RadioGroup } from "../forms/RadioGroup";
 import { WA, DIRECCION } from "../../lib/heredia";
 import { AGENCIA, ANA, MAIL, TELEFONO } from "../../lib/contacto";
+import { eventoGTM, leerAtribucion } from "../../lib/atribucion";
 
 type Errores = {
   nombre?: string;
@@ -41,6 +42,14 @@ export function Contacto() {
     document.getElementById(primero)?.focus();
   }
 
+  /* Quien toca el mail quiere escribir: se deja el canal en Mail y el foco
+     en el primer campo, sin robarle el scroll al salto del ancla. */
+  function irAlFormularioPorMail() {
+    setEnviado(false);
+    setCanal("Mail");
+    requestAnimationFrame(() => document.getElementById("nombre")?.focus({ preventScroll: true }));
+  }
+
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (enviando) return;
@@ -67,10 +76,17 @@ export function Contacto() {
           canal,
           consentimiento: data.get("consentimiento") === "on",
           empresa: data.get("empresa"),
+          ...leerAtribucion(),
         }),
       });
       const json = await res.json().catch(() => ({}));
       if (res.ok && json.ok) {
+        /* La conversión se avisa recién acá, con el envío confirmado por el
+           servidor: un error o un rebote de validación no cuentan como lead. */
+        eventoGTM("generate_lead", {
+          canal,
+          tipologia: String(data.get("tipologia") || ""),
+        });
         setEnviado(true);
       } else if (json.error === "validacion" && json.errores) {
         marcarErrores(json.errores);
@@ -107,7 +123,12 @@ export function Contacto() {
                   </span>
                   <span className="contacto-canal">
                     <span className="contacto-canal__label">{c.label}</span>
-                    <a className="contacto-canal__value" href={c.href}>
+                    <a
+                      className={`contacto-canal__value${c.icon === "mail" ? " contacto-canal__value--mail" : ""}`}
+                      href={c.href}
+                      {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+                      onClick={c.href === MAIL.href ? irAlFormularioPorMail : undefined}
+                    >
                       {c.value}
                     </a>
                   </span>
@@ -137,7 +158,7 @@ export function Contacto() {
             </p>
           </div>
 
-          <div className="contacto-panel" data-reveal>
+          <div className="contacto-panel" id="consulta" data-reveal>
             {enviado ? (
               <div className="stack-lg" role="status">
                 <span style={{ color: "var(--sage-700)" }}>
@@ -146,8 +167,8 @@ export function Contacto() {
                 <h3 className="ac-h3">Listo, me llegó tu consulta.</h3>
                 <p className="ac-body">
                   Te escribo por {canal.toLowerCase()} dentro de las próximas 24 horas hábiles. Si es
-                  urgente, llamame al{" "}
-                  <a className="ac-data" href={TELEFONO.href}>
+                  urgente, escribime por WhatsApp al{" "}
+                  <a className="ac-data" href={TELEFONO.href} target="_blank" rel="noopener">
                     {TELEFONO.display}
                   </a>
                   .
