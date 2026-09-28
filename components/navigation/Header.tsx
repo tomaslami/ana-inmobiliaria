@@ -96,6 +96,12 @@ export function Header({
     return () => observer.disconnect();
   }, [links]);
 
+  /* En mobile la cabecera se esconde sobre la foto: si el cajón quedó
+     abierto al volver arriba, se cierra con ella. */
+  useEffect(() => {
+    if (sobreFoto) setOpen(false);
+  }, [sobreFoto]);
+
   /* El cajón se cierra con Escape, devolviendo el foco al botón. */
   useEffect(() => {
     if (!open) return;

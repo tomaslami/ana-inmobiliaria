@@ -46,12 +46,16 @@
    (0fr → 1fr): altura real sin medir nada. El padding y el filete superior
    viven en el wrapper INTERNO al recorte: en el ítem de la grilla, border-box
    les pondría piso a la altura cerrada. `visibility` espera al fin del cierre
-   para sacar el contenido del árbol de accesibilidad. */
-.ac-header__drawerbox { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows var(--duration-base) var(--ease-standard), visibility 0s linear var(--duration-base); }
+   para sacar el contenido del árbol de accesibilidad.
+   Flota ENCIMA de la página, anclado al pie de la cabecera y de borde a
+   borde: en el flujo empujaba el hero hacia abajo y dejaba una franja de
+   fondo con el monograma claro invisible encima. Al salir del .ac-container
+   el margen lateral lo pone el propio cajón. */
+.ac-header__drawerbox { position: absolute; inset-inline: 0; top: 100%; display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows var(--duration-base) var(--ease-standard), visibility 0s linear var(--duration-base); }
 .ac-header__drawerbox[data-open] { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows var(--duration-base) var(--ease-standard); }
 @media (min-width: 62rem) { .ac-header__drawerbox { display: none; } }
 .ac-header__drawerclip { min-height: 0; overflow: hidden; }
-.ac-header__drawer { display: flex; flex-direction: column; gap: var(--space-xs); padding: var(--space-md) 0 var(--space-xl); border-top: var(--border-hairline) solid var(--rule-hairline); }
+.ac-header__drawer { display: flex; flex-direction: column; gap: var(--space-xs); max-height: calc(100dvh - var(--header-total)); overflow-y: auto; padding: var(--space-md) var(--gutter) var(--space-xl); background: var(--surface-page); border-top: var(--border-hairline) solid var(--rule-hairline); border-bottom: var(--line-divider); }
 .ac-header__drawer .ac-navlink { border-bottom: var(--border-hairline) solid var(--rule-hairline); width: 100%; font-size: var(--size-h4); font-family: var(--font-display); }
 
 /* Pie */

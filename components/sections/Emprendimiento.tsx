@@ -11,7 +11,7 @@ const PLIEGO = [
   { label: "Tipologías", value: "Mono a 4 amb.", note: "Ocho plantas distintas, todas con balcón o terraza propia", lead: true },
   { label: "Superficies", value: "37 a 166 m²", note: "Totales, incluyendo superficie descubierta y común" },
   { label: "Terraza común", value: "Pileta + parrilla", note: "Con deck, solárium y área verde, en el último piso" },
-  { label: "Precio y pago", value: "A consultar", note: "Esquema en pozo: te paso la lista vigente y la proyección de cuotas" },
+  { label: "Precio y pago", value: "A consultar", note: "40% de anticipo + cuotas durante la obra. Te paso la lista vigente y la proyección de cuotas." },
 ];
 
 /* Sólo lo que figura en brochure y planos. Nada inventado. */

@@ -23,7 +23,7 @@ const NAV = [
   { label: "Heredia", href: "#emprendimiento" },
   { label: "Tipologías", href: "#tipologias" },
   { label: "Ubicación", href: "#ubicacion" },
-  { label: "Entregados", href: "#terminados" },
+  { label: "Obras terminadas", href: "#terminados" },
   { label: "Preguntas", href: "#faq" },
 ];
 
@@ -64,7 +64,7 @@ export default function Home() {
             heading: "Contacto",
             content: (
               <>
-                <ContactRow icon="phone" value={TELEFONO.display} href={TELEFONO.href} />
+                <ContactRow icon="phone" value={TELEFONO.display} href={TELEFONO.href} target="_blank" rel="noopener" />
                 <ContactRow icon="mail" value={MAIL.display} href={MAIL.href} />
                 <ContactRow
                   icon="map-pin"
@@ -81,7 +81,7 @@ export default function Home() {
               { label: "El emprendimiento", href: "#emprendimiento" },
               { label: "Tipologías y planos", href: "#tipologias" },
               { label: "Ubicación", href: "#ubicacion" },
-              { label: "Obras entregadas", href: "#terminados" },
+              { label: "Obras terminadas", href: "#terminados" },
               { label: "Preguntas frecuentes", href: "#faq" },
             ],
           },

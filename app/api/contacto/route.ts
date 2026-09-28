@@ -13,6 +13,7 @@
 
 import { Resend } from "resend";
 import { MAIL } from "../../../lib/contacto";
+import { PARAMETROS_ATRIBUCION, ROTULOS_ATRIBUCION } from "../../../lib/atribucion";
 
 const REMITENTE = "Sitio de Ana Chaher <consultas@anachaher.com>";
 /** Las consultas llegan al mail de Ana en Century 21: ana.chaher@c21premier.com.ar */
@@ -88,6 +89,15 @@ export async function POST(request: Request) {
     ["Prefiere que le escriban por", c.canal],
     ["Autoriza el contacto", c.consentimiento ? "Sí" : "No"],
   ];
+
+  /* De qué anuncio llegó (gclid, fbclid, utm_*): lo guarda el navegador al
+     entrar desde la campaña. Sin anuncio no hay filas: el mail queda igual. */
+  const origen: [string, string][] = [];
+  for (const p of PARAMETROS_ATRIBUCION) {
+    const v = texto(body[p], 300);
+    if (v) origen.push([ROTULOS_ATRIBUCION[p], v]);
+  }
+  filas.push(["Origen", origen.length ? "Anuncio / campaña" : "Directo u orgánico"], ...origen);
 
   const html = `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#1f2a24;max-width:560px">
