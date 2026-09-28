@@ -17,7 +17,7 @@ export function whatsapp(mensaje: string): string {
 }
 
 /** Mensaje del botón flotante: general, no habla de ningún emprendimiento. */
-export const WA_CONSULTA = whatsapp("Hola Ana, estoy en tu sitio y quiero hacerte una consulta.");
+export const WA_CONSULTA = whatsapp("Hola Ana! Te escribo desde la web, quería hacerte una consulta.");
 
 export const TELEFONO = {
   /** Como se lee en pantalla. */

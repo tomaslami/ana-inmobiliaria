@@ -22,11 +22,15 @@ import plano701 from "@/images/emprendimiento/planos/piso7-701.jpg";
 
 /* ── Contacto directo ──────────────────────────────────────────────── */
 
+/* Todos los mensajes arrancan igual, así Ana sabe de un vistazo que la
+   consulta viene de la web y por qué emprendimiento; después va lo puntual. */
+const LEYENDA = "Hola Ana! Te escribo desde la web, por los departamentos en pozo de Heredia 1320 (Villa Ortúzar).";
+
 export const WA = {
-  brochure: whatsapp("Hola Ana, vi Heredia en tu sitio y quiero recibir el brochure completo."),
-  precios: whatsapp("Hola Ana, quiero la lista de precios y forma de pago de Heredia."),
+  brochure: whatsapp(`${LEYENDA} ¿Me mandás el brochure completo?`),
+  precios: whatsapp(`${LEYENDA} ¿Me pasás la lista de precios y las formas de pago?`),
   tipologia: (nombre: string) =>
-    whatsapp(`Hola Ana, me interesa la tipología ${nombre} de Heredia. ¿Me pasás disponibilidad y precio?`),
+    whatsapp(`${LEYENDA} Me interesa el ${nombre}. ¿Me pasás disponibilidad y precio?`),
 };
 
 export const SUPERCIELO_URL = "https://supercielo.com.ar";
